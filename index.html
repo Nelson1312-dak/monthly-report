@@ -1465,13 +1465,13 @@
                     s1.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 0.7, w: 3.2, h: 0.42, fill: { color: NAVY }, rectRadius: 0.21 });
                     s1.addText('BÁO CÁO CHIẾN LƯỢC Q2/2026', {
                         x: 0.8, y: 0.7, w: 3.2, h: 0.42,
-                        fontSize: 9.5, bold: true, color: GOLD, align: 'center', fontFace: "Arial", characterSpacing: 2
+                        fontSize: 9.5, bold: true, color: GOLD, align: 'center', fontFace: "Arial"
                     });
 
                     // Main Title (text-5xl font-black equivalent)
                     s1.addText('Báo cáo Kết quả Công tác\nKhối Digital - Tháng 5/2026', {
                         x: 0.8, y: 1.5, w: 8.0, h: 1.8,
-                        fontSize: 36, color: NAVY, bold: true, fontFace: "Arial", lineSpacingMultiple: 1.05
+                        fontSize: 36, color: NAVY, bold: true, fontFace: "Arial"
                     });
 
                     // Orange left accent bar (border-l-4) + subtitle quote
@@ -1502,7 +1502,7 @@
                     // === RIGHT COLUMN (4/12 grid): Circle + SHS Bar Chart Icon ===
 
                     // Large circle background with subtle shadow
-                    s1.addShape(pptx.shapes.OVAL, { x: 9.6, y: 1.15, w: 3.2, h: 3.2, fill: { color: 'F8FAFC' }, line: { color: 'E2E8F0', width: 1 }, shadow: { type: 'outer', blur: 8, offset: 3, color: '00000010' } });
+                    s1.addShape(pptx.shapes.OVAL, { x: 9.6, y: 1.15, w: 3.2, h: 3.2, fill: { color: 'F8FAFC' }, line: { color: 'E2E8F0', width: 1 }, shadow: { type: 'outer', blur: 8, offset: 3, color: '000000', opacity: 0.06 } });
 
                     // SHS Brand Icon: 3 ascending bars (matches the bar chart logo in HTML header)
                     s1.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 10.35, y: 2.95, w: 0.55, h: 1.0, fill: { color: NAVY }, rectRadius: 0.06 });
@@ -1510,7 +1510,7 @@
                     s1.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 11.75, y: 1.65, w: 0.55, h: 2.3, fill: { color: NAVY }, rectRadius: 0.06 });
 
                     // Orange badge: "Target Q2 Go-live" (bottom-right of circle, slight offset)
-                    s1.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 10.5, y: 4.15, w: 2.4, h: 0.42, fill: { color: ORANGE }, rectRadius: 0.21, shadow: { type: 'outer', blur: 4, offset: 2, color: '00000018' } });
+                    s1.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 10.5, y: 4.15, w: 2.4, h: 0.42, fill: { color: ORANGE }, rectRadius: 0.21, shadow: { type: 'outer', blur: 4, offset: 2, color: '000000', opacity: 0.1 } });
                     s1.addText('Target Q2 Go-live', { x: 10.5, y: 4.15, w: 2.4, h: 0.42, fontSize: 10, bold: true, color: WHITE, align: 'center', fontFace: "Arial" });
 
 
