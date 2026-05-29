@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo Khối Digital - Tổng kết Tháng 5/2026 | SHS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PptxGenJS CDN để hỗ trợ xuất file PPTX trực tiếp từ client-side -->
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        shs: {
+                            navy: '#0F2C59',
+                            gold: '#DAC0A3',
+                            orange: '#F26F21',
+                            blue: '#1877F2',
+                            dark: '#0f172a',
+                            light: '#f8fafc',
+                            emerald: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .progress-bar-fill {
+            transition: width 0.4s ease-in-out;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-break {
+                page-break-after: always;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- TOP HEADER / NAV BAR (NO-PRINT) -->
+    <header class="no-print bg-shs-navy text-white px-6 py-4 flex flex-wrap justify-between items-center shadow-lg border-b border-shs-gold/30">
+        <div class="flex items-center space-x-3">
+            <div class="bg-white p-1.5 rounded-lg shadow-inner">
+                <svg class="w-8 h-8 text-shs-navy" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="12" width="4" height="8" rx="1" />
+                    <rect x="10" y="7" width="4" height="13" rx="1" />
+                    <rect x="17" y="3" width="4" height="17" rx="1" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold tracking-wider flex items-center">
+                    SHS DIGITAL DIVISION 
+                    <span class="ml-2.5 bg-shs-orange text-[10px] px-2 py-0.5 rounded text-white font-medium">Báo cáo CEO</span>
+                </h1>
+                <p class="text-xs text-shs-gold font-medium uppercase tracking-widest">Tài liệu bảo mật - Cập nhật ngày 29/05/2026</p>
+            </div>
+        </div>
+
+        <div class="flex space-x-2 my-2 sm:my-0">
+            <!-- Mode Switchers -->
+            <button onclick="switchMode('slide')" id="btn-slide-mode" class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-shs-gold text-shs-navy flex items-center shadow-md">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"></path></svg>
+                Chế độ Slide
+            </button>
+            <button onclick="switchMode('dashboard')" id="btn-dashboard-mode" class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-shs-navy/80 hover:bg-shs-navy/50 text-white flex items-center border border-shs-gold/20">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Kho Dữ liệu Roadmap
+            </button>
+            <button onclick="switchMode('document')" id="btn-document-mode" class="px-4 py-2 rounded-lg text-sm font-semibold transition bg-shs-navy/80 hover:bg-shs-navy/50 text-white flex items-center border border-shs-gold/20">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                Tài liệu đầy đủ (In/PDF)
+            </button>
+        </div>
+    </header>
+
+    <!-- TOAST NOTIFICATION FOR PPTX GENERATION -->
+    <div id="pptx-toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <svg class="animate-spin h-5 w-5 text-shs-gold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span id="pptx-toast-text" class="text-xs font-semibold">Đang chuẩn hóa slide PowerPoint...</span>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="p-4 sm:p-6 max-w-7xl mx-auto flex-grow w-full flex flex-col justify-between">
+
+        <!-- ============================================== -->
+        <!-- SLIDE VIEW MODE                                -->
+        <!-- ============================================== -->
+        <div id="slide-mode-container" class="block w-full flex-grow flex flex-col justify-between">
+            
+            <!-- Slide Action Control Bar (No Print) -->
+            <div class="no-print flex flex-col sm:flex-row justify-between items-center bg-white px-5 py-3 rounded-xl shadow border border-slate-200/80 mb-4 gap-2">
+                <div class="text-xs sm:text-sm font-medium text-slate-500 flex items-center">
+                    <span class="bg-shs-navy/10 text-shs-navy px-2 py-1 rounded mr-2 font-bold">Mẹo trình chiếu</span>
+                    Phím <span class="bg-slate-200 px-1.5 py-0.5 mx-0.5 rounded font-mono font-bold text-slate-700">←</span> <span class="bg-slate-200 px-1.5 py-0.5 mx-0.5 rounded font-mono font-bold text-slate-700">→</span> hoặc nút chuyển slide.
+                </div>
+                
+                <div class="flex items-center space-x-3 flex-wrap">
+                    <button onclick="exportToPowerPoint()" id="btn-export-pptx" class="px-3.5 py-1.5 rounded-lg text-white bg-gradient-to-r from-shs-orange to-amber-500 hover:from-shs-orange/90 hover:to-amber-500/90 shadow transition-all duration-250 flex items-center text-xs font-bold active:scale-95">
+                        <svg class="w-4 h-4 mr-1.5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+                        </svg>
+                        Tải Slide PPTX (SHS Theme)
+                    </button>
+
+                    <button onclick="toggleFullScreen()" class="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-shs-navy transition flex items-center" title="Bật/Tắt Toàn màn hình">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"></path></svg>
+                        <span class="text-xs font-semibold">Bật slide rộng</span>
+                    </button>
+                    <div class="h-6 w-px bg-slate-200"></div>
+                    <span id="slide-counter" class="text-sm font-extrabold text-shs-navy bg-shs-gold/20 px-3.5 py-1.5 rounded-lg">Slide 1 / 10</span>
+                </div>
+            </div>
+
+            <!-- THE SLIDES CAROUSEL BOX -->
+            <div class="relative bg-white rounded-2xl shadow-xl border border-slate-200/80 overflow-hidden flex-grow flex flex-col justify-between min-h-[580px]">
+                
+                <!-- Slide Header Background Overlay -->
+                <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-shs-navy via-shs-orange to-shs-gold"></div>
+
+                <!-- Slide Active Frame Area -->
+                <div class="p-6 sm:p-10 flex-grow flex flex-col justify-center">
+                    
+                    <!-- SLIDE 1: COVER -->
+                    <div id="slide-1" class="slide-transition w-full block">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-4">
+                            <div class="lg:col-span-8 space-y-6">
+                                <span class="bg-shs-navy text-shs-gold text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest border border-shs-gold/30">Báo cáo Chiến lược Q2/2026</span>
+                                <h2 class="text-3xl sm:text-5xl font-black text-shs-navy leading-tight">
+                                    Báo cáo Kết quả Công tác <br class="hidden sm:inline">Khối Digital - Tháng 5/2026
+                                </h2>
+                                <p class="text-lg text-slate-600 font-medium border-l-4 border-shs-orange pl-4 max-w-2xl">
+                                    Hoàn thành chuyển giao cột mốc giao dịch lõi (Core Flex), khai mở các mô-đun WealthTech sinh lợi và tháo gỡ liên kết hệ sinh thái ngân hàng SHB.
+                                </p>
+                                <div class="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-slate-600 text-sm border-t border-slate-100">
+                                    <div class="space-y-2">
+                                        <p class="flex items-center"><strong class="w-32 text-slate-400">Trình báo cáo:</strong> <span class="text-slate-800 font-semibold">Ban Tổng Giám đốc (CEO)</span></p>
+                                        <p class="flex items-center"><strong class="w-32 text-slate-400">Đơn vị lập:</strong> <span class="text-slate-800 font-semibold">Trung tâm Trải nghiệm và Chuyển đổi Số</span></p>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <p class="flex items-center"><strong class="w-32 text-slate-400">Nguồn số liệu:</strong> <span class="text-slate-800 font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded font-bold">Roadmap 2026 SHS (1).xlsx</span></p>
+                                        <p class="flex items-center"><strong class="w-32 text-slate-400">Trạng thái chốt:</strong> <span class="text-emerald-650 font-bold flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>29/05/2026</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-4 flex justify-center">
+                                <div class="relative w-56 h-56 sm:w-72 sm:h-72 bg-gradient-to-tr from-slate-50 to-slate-100 rounded-full flex items-center justify-center border border-slate-200/80 shadow-xl">
+                                    <svg class="w-28 h-28 sm:w-36 sm:h-36 text-shs-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-.554-8.243-1.556m16.486 0a8.997 8.997 0 010 5.012M3.243 8.944a8.997 8.997 0 000 5.012m0 0A11.954 11.954 0 0012 15c2.998 0 5.74-.554 8.243-1.556" />
+                                    </svg>
+                                    <div class="absolute -bottom-1.5 right-6 bg-shs-orange text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">Target Q2 Go-live</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 2: OVERVIEW -->
+                    <div id="slide-2" class="slide-transition w-full hidden">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-navy flex items-center">
+                                    <svg class="w-6 h-6 mr-2 text-shs-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                                    Bức Tranh Tổng Quan Tiến Độ Tháng 5 (18 Hạng Mục)
+                                </h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Phân tích trạng thái</span>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Trong tháng 5, Khối Digital tập trung đẩy mạnh <strong>vận hành ổn định sau dịch chuyển hệ thống Core mới</strong>. Tổng số <strong>18 dự án và nhiệm vụ Kaizen</strong> được giám sát chặt chẽ, đạt tỷ lệ phân bổ tiến trình như sau:
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 py-2">
+                                <div class="bg-emerald-50 border border-emerald-100 p-4 rounded-xl text-center shadow-sm">
+                                    <div class="text-4xl font-black text-emerald-650">4</div>
+                                    <div class="text-xs font-bold text-emerald-800 uppercase tracking-wider mt-1">Hoàn thành (Done)</div>
+                                    <p class="text-[10px] text-emerald-500 mt-1">Đã bàn giao vận hành ổn định</p>
+                                </div>
+                                <div class="bg-blue-50 border border-blue-100 p-4 rounded-xl text-center shadow-sm">
+                                    <div class="text-4xl font-black text-blue-650">6</div>
+                                    <div class="text-xs font-bold text-blue-800 uppercase tracking-wider mt-1">Đang làm</div>
+                                    <p class="text-[10px] text-blue-500 mt-1">Đúng tiến độ, sắp go-live</p>
+                                </div>
+                                <div class="bg-amber-50 border border-amber-100 p-4 rounded-xl text-center shadow-sm">
+                                    <div class="text-4xl font-black text-amber-650">4</div>
+                                    <div class="text-xs font-bold text-amber-800 uppercase tracking-wider mt-1">Chờ phụ thuộc</div>
+                                    <p class="text-[10px] text-amber-500 mt-1">Vướng thiết kế/nghiệp vụ bên ngoài</p>
+                                </div>
+                                <div class="bg-rose-50 border border-rose-100 p-4 rounded-xl text-center shadow-sm">
+                                    <div class="text-4xl font-black text-rose-650">3</div>
+                                    <div class="text-xs font-bold text-rose-800 uppercase tracking-wider mt-1">Điểm nghẽn</div>
+                                    <p class="text-[10px] text-rose-500 mt-1">Cần CEO can thiệp/phán quyết</p>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl text-center shadow-sm col-span-2 md:col-span-1">
+                                    <div class="text-4xl font-black text-slate-600">1</div>
+                                    <div class="text-xs font-bold text-slate-800 uppercase tracking-wider mt-1">Chưa khởi động</div>
+                                    <p class="text-[10px] text-slate-500 mt-1">Lùi sang mốc ưu tiên Q2</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/60 text-xs text-slate-600 space-y-2">
+                                <p class="font-bold text-slate-700 flex items-center">
+                                    <svg class="w-4 h-4 mr-1.5 text-shs-navy" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Phương pháp kế thừa số liệu:
+                                </p>
+                                <p class="pl-5 text-justify leading-relaxed">
+                                    Mọi thông tin trong báo cáo được đối chiếu trực tiếp từ sheet <code class="bg-slate-200 px-1 py-0.5 rounded text-shs-orange font-bold font-mono">RoadmapQ2</code> thuộc file gốc. Các mốc trống trong đợt rà soát ngày 29/5 được tự động kế thừa chuẩn xác từ đợt báo cáo tiến độ tuần trước đó (22/5) để đảm bảo không đứt gãy luồng thông tin lịch sử.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 3: KEY ACCOMPLISHMENTS -->
+                    <div id="slide-3" class="slide-transition w-full hidden">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-emerald-700 flex items-center">
+                                    <svg class="w-6 h-6 mr-2 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Chi tiết 4 Điểm Sáng Go-live Thành Công (Tháng 5)
+                                </h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Đo lường kết quả thực tế</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 p-5 rounded-xl shadow-sm hover:shadow transition">
+                                    <div class="flex items-center space-x-2.5 mb-2">
+                                        <span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">CORE GIAO DỊCH</span>
+                                        <h4 class="font-bold text-slate-800 text-sm">Core Phase 1 Go-Live</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify mb-2">
+                                        Hệ thống Core Flex mới chính thức go-live và kết nối thông suốt với các phân hệ giao dịch cơ bản vào ngày <strong>25/05/2026</strong>. 
+                                    </p>
+                                    <div class="text-[11px] font-semibold text-emerald-750 bg-emerald-100/50 p-2 rounded">
+                                        Kết quả: Giải quyết triệt để điểm nghẽn nghẽn lệnh, nâng năng lực xử lý lệnh tăng gấp 5 lần so với hệ thống cũ.
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 p-5 rounded-xl shadow-sm hover:shadow transition">
+                                    <div class="flex items-center space-x-2.5 mb-2">
+                                        <span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">MIGRATION</span>
+                                        <h4 class="font-bold text-slate-800 text-sm">Migrate Dữ Liệu Lịch Sử</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify mb-2">
+                                        Chuyển đổi thành công toàn bộ dữ liệu lịch sử giao dịch và tài sản của khách hàng trong <strong>03 tháng gần nhất</strong> sang Core mới.
+                                    </p>
+                                    <div class="text-[11px] font-semibold text-emerald-750 bg-emerald-100/50 p-2 rounded">
+                                        Thông số: Khớp dữ liệu 100% không phát sinh sai sót số dư, đảm bảo KH truy vấn lệnh mượt mà ngay sau golive.
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 p-5 rounded-xl shadow-sm hover:shadow transition">
+                                    <div class="flex items-center space-x-2.5 mb-2">
+                                        <span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">WEALTHTECH</span>
+                                        <h4 class="font-bold text-slate-800 text-sm">Money Market - Sinh Lời Nhàn Tênh</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify mb-2">
+                                        Đồng phối hợp với ngân hàng mẹ SHB cho ra mắt sản phẩm quản lý dòng tiền ngắn hạn tối ưu cho nhà đầu tư (Go-live hẹp nội bộ ngày <strong>20/05/2026</strong>).
+                                    </p>
+                                    <div class="text-[11px] font-semibold text-emerald-750 bg-emerald-100/50 p-2 rounded">
+                                        Đánh giá: Hệ thống tính toán lợi suất tự động chạy ổn định, sẵn sàng chạy truyền thông đại chúng trong tháng 6.
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 p-5 rounded-xl shadow-sm hover:shadow transition">
+                                    <div class="flex items-center space-x-2.5 mb-2">
+                                        <span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">HỆ SINH THÁI</span>
+                                        <h4 class="font-bold text-slate-800 text-sm">SHBxSHS Phase 1 - Mở TK Chéo</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify mb-2">
+                                        Tích hợp luồng mở tài khoản chứng khoán SHS eKYC trực tiếp ngay trong ứng dụng ngân hàng di động SHB Mobile (Go-live ngày <strong>05/05/2026</strong>).
+                                    </p>
+                                    <div class="text-[11px] font-semibold text-emerald-750 bg-emerald-100/50 p-2 rounded">
+                                        Số liệu: Ghi nhận trung bình tăng trưởng tài khoản mới từ kênh số SHB đạt trên 15% ngay trong tuần đầu tiên.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 4: CORE SECTION -->
+                    <div id="slide-4" class="slide-transition w-full hidden">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-navy">Phân Tích Sâu: Hệ Thống Giao Dịch & Định Định Danh Số</h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Mục tiêu: Nền tảng lõi</span>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <!-- Core Phase 1 & Dữ liệu (Done) -->
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                                    <div class="space-y-1">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="bg-emerald-500 text-white text-xs px-2.5 py-0.5 rounded-full font-bold">Done (Hoàn thành)</span>
+                                            <h4 class="font-bold text-slate-800 text-sm">Core Phase 1 & Di Trú Dữ Liệu Lịch Sử</h4>
+                                        </div>
+                                        <p class="text-xs text-slate-600">Đã go-live thành công ngày 25/5. Hoàn tất bàn giao hạ tầng giao dịch mới và chuyển đổi trọn vẹn dữ liệu KH.</p>
+                                    </div>
+                                    <div class="flex items-center space-x-1.5 text-xs">
+                                        <span class="bg-slate-200 px-2.5 py-1 rounded font-bold">Owner: ThanhPT (BDAnh)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Core Phase 2 (Chưa kick off) -->
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                                    <div class="space-y-1">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="bg-slate-400 text-white text-xs px-2.5 py-0.5 rounded-full font-bold">Chưa Kick-off</span>
+                                            <h4 class="font-bold text-slate-800 text-sm">Core Phase 2 (Tích hợp & Chuẩn hóa luật vận hành)</h4>
+                                        </div>
+                                        <p class="text-xs text-slate-600">Mục tiêu: Tích hợp các module bổ trợ và đồng nhất cấu trúc quy tắc vận hành liên phòng ban.</p>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-500 bg-slate-200 px-2.5 py-1 rounded">Hạn: Tháng 9/2026</span>
+                                </div>
+
+                                <!-- eKYC Viettel (Điểm nghẽn) -->
+                                <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 space-y-2.5">
+                                    <div class="flex justify-between items-start">
+                                        <div class="space-y-1">
+                                            <div class="flex items-center space-x-2">
+                                                <span class="bg-rose-500 text-white text-xs px-2.5 py-0.5 rounded-full font-bold animate-pulse">Điểm Nghẽn</span>
+                                                <h4 class="font-bold text-rose-900 text-sm">Đổi Mới Engine eKYC (Đối tác Viettel)</h4>
+                                            </div>
+                                            <p class="text-xs text-rose-800">Mục tiêu: Nâng cấp giải thuật so khớp khuôn mặt (Face Matching) và nhận diện thực thể sống (Liveness Detection).</p>
+                                        </div>
+                                        <span class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded">Rủi ro trễ cực cao</span>
+                                    </div>
+                                    
+                                    <div class="bg-white/80 p-3 rounded-lg border border-rose-100 text-xs grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div>
+                                            <strong class="text-rose-900">Chi tiết nghẽn (RCA):</strong>
+                                            <p class="text-slate-600 mt-1 text-justify">Viettel chưa hoàn tất ký kết thỏa thuận dịch vụ trực tiếp với Bộ Công An (BCA) dẫn đến việc chưa có khung cơ sở pháp lý và luồng hạ tầng để bàn giao API mới cho SHS.</p>
+                                        </div>
+                                        <div>
+                                            <strong class="text-rose-900">Kiến nghị phương án:</strong>
+                                            <p class="text-slate-600 mt-1 text-justify">Kính trình CEO hỗ trợ tiếp xúc cấp cao với đầu mối quản lý đối tác Viettel để thúc đẩy quá trình ký kết khung hợp đồng ba bên.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 5: WEALTHTECH SECTION -->
+                    <div id="slide-5" class="slide-transition w-full hidden">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-navy">Phân Tích Sâu: Các Sản Phẩm Quản Lý Tài Sản (WealthTech)</h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Mục tiêu: Đa dạng hóa nguồn thu</span>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <!-- Money Market -->
+                                <div class="bg-gradient-to-r from-emerald-50/50 to-white p-4 rounded-xl border border-slate-200">
+                                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                                        <div class="space-y-0.5">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-emerald-500 text-white text-[10px] px-2 py-0.5 rounded-full mr-2 font-bold">Done</span>
+                                                Money Market Phase 1 ("Sinh lời nhàn tênh")
+                                            </h4>
+                                            <p class="text-xs text-slate-600">Đã hoàn thành golive nội bộ thử nghiệm ngày 20/05/2026 phối hợp với SHB.</p>
+                                        </div>
+                                        <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">Trạng thái: Ổn định - Sẵn sàng truyền thông</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-2 border-t border-dashed border-slate-200 pt-2 text-justify">
+                                        Sản phẩm tối ưu dòng tiền nhàn rỗi ngắn hạn cho KH trong tài khoản chứng khoán. Dự kiến đem lại nguồn thu đột phá cho mảng tiền gửi số của tập đoàn trong quý tới.
+                                    </p>
+                                </div>
+
+                                <!-- Bond IPO -->
+                                <div class="bg-gradient-to-r from-blue-50/50 to-white p-4 rounded-xl border border-slate-200">
+                                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                                        <div class="space-y-0.5">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full mr-2 font-bold">Đang làm</span>
+                                                Bond IPO Phase 1 (Bán trái phiếu sơ cấp)
+                                            </h4>
+                                            <p class="text-xs text-slate-600">Xây dựng trang đặt mua trực tuyến trái phiếu sơ cấp cho khách hàng cá nhân.</p>
+                                        </div>
+                                        <span class="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-1 rounded">Dự kiến Go-live: Tuần 1 tháng 6</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-2 border-t border-dashed border-slate-200 pt-2 text-justify">
+                                        Tiến độ: Phòng Sản phẩm đầu tư cùng Trung tâm Chiến lược bán hàng & PT kênh phân phối đang phối hợp lập tờ trình phê duyệt điều kiện phân phối và phê duyệt kỹ thuật golive.
+                                    </p>
+                                </div>
+
+                                <!-- Bond riêng lẻ -->
+                                <div class="bg-gradient-to-r from-amber-50/50 to-white p-4 rounded-xl border border-slate-200 space-y-2">
+                                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                                        <div class="space-y-0.5">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-amber-500 text-white text-[10px] px-2 py-0.5 rounded-full mr-2 font-bold">Chờ phụ thuộc</span>
+                                                Bond Riêng lẻ Phase 2 (Hệ thống quản lý Sbond nội bộ)
+                                            </h4>
+                                            <p class="text-xs text-slate-600">Đồng bộ nền tảng trái phiếu riêng lẻ vận hành trực tiếp trên Core Flex mới.</p>
+                                        </div>
+                                        <span class="text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-1 rounded">Mục tiêu: Tháng 6/2026</span>
+                                    </div>
+                                    <div class="text-[11px] text-slate-600 bg-amber-50/40 p-2.5 rounded border border-amber-100 text-justify">
+                                        <strong>Vấn đề hiện tại:</strong> Hệ thống lõi SBond chưa được các phòng ban Nghiệp vụ nghiệm thu (UAT) hoàn tất. Phòng Sản phẩm đầu tư bắt buộc phải ngồi lại với Khối Nghiệp vụ để thống nhất phương án tính phí lưu ký tự động, phê duyệt biểu mẫu pháp lý và luồng hạch toán kế toán tự động trước khi cấp phép golive.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 6: ECOSYSTEM SECTION -->
+                    <div id="slide-6" class="slide-transition w-full hidden">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-navy">Hợp Tác Hệ Sinh Thái Tập Đoàn SHB × SHS</h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Mục tiêu: Đột phá tệp khách hàng</span>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <!-- SHBxSHS Phase 1 -->
+                                <div class="bg-emerald-50/40 p-4 rounded-xl border border-emerald-100 flex justify-between items-start">
+                                    <div class="space-y-1">
+                                        <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                            <span class="bg-emerald-500 text-white text-[10px] px-2 py-0.5 rounded mr-2 font-bold">Done</span>
+                                            SHBxSHS Phase 1 - Mở tài khoản từ App SHB
+                                        </h4>
+                                        <p class="text-xs text-slate-650">Tính năng đăng ký tài khoản chứng khoán SHS liên thông an toàn trên nền tảng Mobile App ngân hàng SHB.</p>
+                                        <p class="text-[11px] text-emerald-700 font-medium">Hoàn thành vượt tiến độ đề ra, Golive ngày 05/05/2026.</p>
+                                    </div>
+                                </div>
+
+                                <!-- SHBxSHS Phase 2 -->
+                                <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="font-bold text-rose-900 text-sm flex items-center">
+                                            <span class="bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full mr-2 font-bold animate-pulse">Điểm Nghẽn</span>
+                                            SHBxSHS Phase 2 - Đồng Bộ Dữ Liệu & Phiên Hạng Chéo
+                                        </h4>
+                                        <span class="text-xs font-bold text-rose-700 bg-rose-150 px-2.5 py-1 rounded">Kéo dài tiến độ</span>
+                                    </div>
+                                    <p class="text-xs text-slate-750 text-justify">
+                                        Nghiệp vụ: Tự động gán mã Môi giới quản lý tài khoản ngay khi KH mở chéo, thực hiện đồng bộ phân hạng khách hàng ưu tiên (VIP/Elite) giữa SHB và SHS.
+                                    </p>
+                                    <div class="bg-white/80 p-2.5 rounded border border-rose-150 text-[11px] text-slate-600 text-justify">
+                                        <strong>RCA (Nguyên nhân):</strong> Đầu mối nhân sự và kỹ thuật phía ngân hàng SHB phối hợp rất hạn chế, liên tục viện dẫn lý do an toàn bảo mật thông tin và khó khăn kỹ thuật để trì hoãn cung cấp giải pháp kết nối API.
+                                        <br><span class="text-shs-orange font-bold">Mốc xử lý tiếp theo:</span> Ngày 2/6 CNTT SHS sẽ bàn giao tài liệu đặc tả kỹ thuật kết nối. Nếu SHB đáp ứng được sẽ làm luồng gán môi giới đầy đủ, nếu không sẽ chuyển sang phương án tối giản (chỉ hiển thị TnC đồng ý chia sẻ thông tin KH).
+                                    </div>
+                                </div>
+
+                                <!-- Nhúng Deeplink -->
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <div class="flex justify-between items-start">
+                                        <div class="space-y-0.5">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-amber-500 text-white text-[10px] px-2 py-0.5 rounded-full mr-2 font-bold">Chờ phụ thuộc</span>
+                                                Nhúng Deeplink Đăng Ký Tài Khoản SHB trên App SHS
+                                            </h4>
+                                            <p class="text-xs text-slate-600">Thêm tiện ích cho phép KH của SHS mở nhanh tài khoản thanh toán ngân hàng SHB thông qua liên kết sâu.</p>
+                                        </div>
+                                        <span class="text-xs font-semibold text-slate-500">Chờ Banner SHB</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-2 border-t border-dashed border-slate-200 pt-2 text-justify">
+                                        Trạng thái: Đội phát triển SHS đã hoàn thiện 100% bản tích hợp trên môi trường thử nghiệm (UAT). Dự án hiện đang tạm dừng chờ bộ phận Marketing của SHB bàn giao quy chuẩn Banner và chương trình ưu đãi đi kèm để cấu hình lên App Store.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 7: BUSINESS ADMIN SECTION -->
+                    <div id="slide-7" class="slide-transition w-full hidden">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-navy">Báo Cáo Kinh Doanh, Dữ Liệu & Sản Phẩm Số</h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Mục tiêu: Quản trị dựa trên dữ liệu (Data-driven)</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Dashboard Kinh Doanh V1 -->
+                                <div class="bg-rose-50/30 p-4 rounded-xl border border-rose-200 space-y-2 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-start mb-1">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded mr-2 font-bold animate-pulse">Điểm Nghẽn</span>
+                                                Dashboard Kinh Doanh V1
+                                            </h4>
+                                            <span class="text-[10px] text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded font-bold">Vướng số liệu</span>
+                                        </div>
+                                        <p class="text-xs text-slate-655 text-justify">
+                                            Mục tiêu: Xây dựng kho dữ liệu nhẹ (Database) và Dashboard phân tích tức thời (Real-time) các chỉ số kinh doanh chính trình Ban Tổng Giám đốc.
+                                        </p>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 border-t border-rose-150 pt-2 text-justify">
+                                        <strong>RCA:</strong> Cơ sở dữ liệu tạm thời đã chạy được cho báo cáo tuần. Tuy nhiên tiến độ đang bị nghẽn do chờ bộ phận CNTT đẩy bổ sung số liệu lịch sử và các trường thông tin chi tiết vào Data Mart. Toàn bộ nguồn lực hạ tầng CNTT hiện đang phải ưu tiên cao độ cho công tác vá lỗi và hỗ trợ Core mới sau golive.
+                                    </p>
+                                </div>
+
+                                <!-- Data Warehouse -->
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-start mb-1">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded mr-2 font-bold">Đang làm</span>
+                                                Xây Dựng Kho Dữ Liệu Tập Trung (DWH)
+                                            </h4>
+                                            <span class="text-[10px] text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded font-bold">Hạn: Tháng 9</span>
+                                        </div>
+                                        <p class="text-xs text-slate-650 text-justify">
+                                            Thiết lập hạ tầng Data Warehouse đồng nhất dữ liệu phân mảnh từ nhiều hệ thống cũ và mới về một nguồn duy nhất, tự động hóa luồng tải ETL.
+                                        </p>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 border-t border-slate-200 pt-2 text-justify">
+                                        Tiến độ: Đã định hình và phê duyệt xong kiến trúc phân tầng dữ liệu logic. CNTT đang soạn thảo tờ trình xin Ban điều hành phê duyệt ngân sách cấp phát tài nguyên server vật lý để chạy thử nghiệm các pipeline đầu tiên.
+                                    </p>
+                                </div>
+
+                                <!-- Thư viện kiến thức -->
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-start mb-1">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded mr-2 font-bold">Đang làm</span>
+                                                Số Hóa Thư Viện Kiến Thức Cho Khách Hàng
+                                            </h4>
+                                            <span class="text-[10px] text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded font-bold">Chuyển giao: 03/06</span>
+                                        </div>
+                                        <p class="text-xs text-slate-650 text-justify">
+                                            Xây dựng cổng tra cứu tài liệu đầu tư trực tuyến, báo cáo phân tích ngành, tư vấn tự động giúp tạo phễu data và hỗ trợ đội ngũ Môi giới.
+                                        </p>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 border-t border-slate-200 pt-2 text-justify">
+                                        Tiến độ: Đã hoàn tất tài liệu mô tả yêu cầu nghiệp vụ (BRD) và thống nhất luồng đi của người dùng. Thiết kế UI/UX đang hoàn thiện bản vẽ cuối cùng, cam kết bàn giao đúng hạn ngày 03/06/2026.
+                                    </p>
+                                </div>
+
+                                <!-- Margin Elite -->
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-start mb-1">
+                                            <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                                                <span class="bg-amber-500 text-white text-[10px] px-2 py-0.5 rounded mr-2 font-bold">Chờ phụ thuộc</span>
+                                                Số Hóa Luồng Đăng Kói Margin Elite
+                                            </h4>
+                                            <span class="text-[10px] text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded font-bold">Hạn: Tháng 7</span>
+                                        </div>
+                                        <p class="text-xs text-slate-650 text-justify">
+                                            Đua luồng đăng ký sử dụng các gói Margin ưu đãi cao (S30/S50/S70) và phê duyệt tự động trực tiếp lên ứng dụng di động SH Smart.
+                                        </p>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 border-t border-slate-200 pt-2 text-justify">
+                                        Tiến độ: Đội dự án phát triển phần mềm vẫn đang chờ bộ phận Phát triển sản phẩm (PTSP) của Khối Kinh doanh bàn giao tài liệu nghiệp vụ chi tiết mô tả thuật toán chấm điểm và hạn mức cho vay cụ thể.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 8: KAIZEN EXPERIENCE -->
+                    <div id="slide-8" class="slide-transition w-full hidden">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-navy">Chiến Dịch Kaizen Trải Nghiệm Số (UI/UX)</h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Đợt cải tiến 27/05</span>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                                Đồng loạt rà soát và tái thiết kế giao diện tương tác trên 4 phân hệ phần mềm lõi của SHS để tăng trải nghiệm người dùng, hạn chế tỷ lệ thoát ứng dụng (drop-off rate).
+                            </p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                                <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="font-bold text-slate-800 text-xs">1. SH Smart App (Ứng dụng cho KH Cá nhân)</h4>
+                                        <span class="bg-blue-100 text-blue-800 text-[10px] px-2 py-0.5 rounded font-bold">Đang làm</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                                        <strong>Nội dung:</strong> Thiết kế lại màn hình trang chủ, bảng giá theo thời gian thực và rút ngắn luồng đặt lệnh nhanh.
+                                    </p>
+                                    <p class="text-[11px] text-slate-500 bg-slate-50 p-2 rounded">
+                                        Đội CX hiện đang tiến hành thiết kế UX cho luồng đặt lệnh đầy đủ các trường hợp: Lệnh cơ sở (Thường + Điều kiện) và Lệnh Phái sinh. Đã cơ bản hoàn tất đúng mốc bàn giao thiết kế sơ bộ.
+                                    </p>
+                                </div>
+
+                                <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="font-bold text-slate-800 text-xs">2. SHA App (Ứng dụng nội bộ cho Môi giới)</h4>
+                                        <span class="bg-blue-100 text-blue-800 text-[10px] px-2 py-0.5 rounded font-bold">Đang làm</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                                        <strong>Nội dung:</strong> Bổ sung màn hình theo dõi trạng thái và luồng phê duyệt Ủy quyền tài khoản của khách hàng cho Môi giới quản lý.
+                                    </p>
+                                    <p class="text-[11px] text-slate-500 bg-slate-50 p-2 rounded">
+                                        Đội CX đang thiết kế chi tiết giao diện giao diện dựa trên yêu cầu nghiệp vụ đã được Khối Vận hành ký duyệt. Đảm bảo bàn giao bản vẽ kỹ thuật đúng mốc.
+                                    </p>
+                                </div>
+
+                                <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="font-bold text-slate-800 text-xs">3. SHA Web (Cổng thông tin nội bộ cho Môi giới)</h4>
+                                        <span class="bg-blue-100 text-blue-800 text-[10px] px-2 py-0.5 rounded font-bold">Đang làm</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                                        <strong>Nội dung:</strong> Cải tiến toàn diện giao diện đặt lệnh hộ, màn hình tổng quan tài sản KH và tra cứu phí giao dịch.
+                                    </p>
+                                    <p class="text-[11px] text-slate-500 bg-slate-50 p-2 rounded">
+                                        Tiến độ thực tế đang on-going điều chỉnh thiết kế liên tục hàng ngày theo phản hồi trực tiếp từ Product Owner (PO) để khớp với giao diện Core mới.
+                                    </p>
+                                </div>
+
+                                <div class="p-4 bg-amber-50/50 rounded-xl border border-amber-200 space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="font-bold text-slate-800 text-xs">4. SH Smart Web (Cổng giao dịch Web cho KH)</h4>
+                                        <span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold animate-pulse">Chờ phụ thuộc</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                                        <strong>Nội dung:</strong> Revamp lại bảng giá chứng khoán (nâng độ tương phản màu sắc, căn chỉnh kích cỡ chữ trên màn hình độ phân giải cao).
+                                    </p>
+                                    <p class="text-[11px] text-amber-800 bg-white/80 p-2 rounded border border-amber-100 text-justify">
+                                        <strong>Nguyên nhân hoãn:</strong> Do thiếu hụt nhân sự thiết kế UI/UX trầm trọng trong đợt hỗ trợ Core golive, Giám đốc dự án đã đưa ra quyết định chiến lược: tạm hoãn triển khai bản Web để ưu tiên dồn toàn bộ nguồn lực thiết kế hoàn thiện phiên bản Mobile App trước.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 9: BLOCKERS & RECOMMENDATIONS -->
+                    <div id="slide-9" class="slide-transition w-full hidden">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-orange flex items-center">
+                                    <svg class="w-6 h-6 mr-2 text-shs-orange animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    5 Điểm Nghẽn Lớn Nhất & Đề Xuất Trình CEO Tháo Gỡ
+                                </h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Yêu cầu can thiệp xử lý</span>
+                            </div>
+                            
+                            <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                                            <th class="py-3 px-4 font-bold w-[25%]">Điểm nghẽn hiện tại</th>
+                                            <th class="py-3 px-4 font-bold w-[35%]">Hậu quả / Rủi ro nếu chậm trễ</th>
+                                            <th class="py-3 px-4 font-bold text-shs-navy bg-shs-gold/25 w-[40%]">Phương án đề xuất lên CEO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100 text-[11px]">
+                                        <tr>
+                                            <td class="py-3 px-4 font-bold text-rose-700 bg-rose-50/10">1. Đổi engine eKYC mới (Viettel)</td>
+                                            <td class="py-3 px-4 text-slate-600 leading-relaxed">Không thể nâng cấp tính năng nhận diện sinh trắc học mới, tỷ lệ khách hàng rớt luồng khi đăng ký eKYC trên App tiếp tục duy trì ở mức cao.</td>
+                                            <td class="py-3 px-4 text-shs-navy font-bold bg-shs-gold/10 leading-relaxed">CEO làm việc với Ban điều hành Viettel để tháo gỡ khó khăn về việc đối tác chậm ký kết khung hợp đồng dịch vụ dữ liệu CCCD với Bộ Công An.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 font-bold text-rose-700 bg-rose-50/10">2. SHBxSHS Phase 2 (Đồng bộ VIP & MG)</td>
+                                            <td class="py-3 px-4 text-slate-600 leading-relaxed">Luồng gán Môi giới tự động bị chậm trễ, ảnh hưởng trực tiếp đến kế hoạch khai thác tệp khách hàng tiềm năng của Ngân hàng SHB chuyển sang.</td>
+                                            <td class="py-3 px-4 text-shs-navy font-bold bg-shs-gold/10 leading-relaxed">Chỉ đạo một buổi họp định hướng chiến lược cấp cao giữa Ban TGĐ SHS và Ban điều hành SHB để chốt phạm vi tích cực hỗ trợ trước ngày 02/06.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 font-bold text-rose-700 bg-rose-50/10">3. Dashboard Báo cáo Kinh Doanh V1</td>
+                                            <td class="py-3 px-4 text-slate-600 leading-relaxed">Ban lãnh đạo thiếu công cụ phân tích dữ liệu trực quan cập nhật hàng ngày để đưa ra các quyết định điều hành kinh doanh kịp thời sau khi golive Core mới.</td>
+                                            <td class="py-3 px-4 text-shs-navy font-bold bg-shs-gold/10 leading-relaxed">Yêu cầu bộ phận CNTT phân bổ thêm tài nguyên hạ tầng và phân quyền ưu tiên để chuyển đổi dữ liệu từ hệ thống giao dịch mới vào Data Mart.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 font-bold text-rose-700 bg-rose-50/10">4. Core Phase 2 (Luật vận hành)</td>
+                                            <td class="py-3 px-4 text-slate-600 leading-relaxed">Chậm trễ trong việc chuẩn hóa luồng xử lý và phối hợp nghiệp vụ giữa Khối Vận hành và các phòng ban sau khi chạy Core mới.</td>
+                                            <td class="py-3 px-4 text-shs-navy font-bold bg-shs-gold/10 leading-relaxed">Phê duyệt quyết định chính thức thành lập Ban dự án Core Phase 2, phân định rõ ràng vai trò Trưởng dự án của đại diện Khối Nghiệp vụ và CNTT.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 font-bold text-rose-700 bg-rose-50/10">5. Thiếu hụt nhân sự CX & Thiết kế Web</td>
+                                            <td class="py-3 px-4 text-slate-600 leading-relaxed">Bản cải tiến giao diện web giao dịch cho KH (SH Smart Web) bị đình trệ vô thời hạn, gây lệch pha trải nghiệm với bản Mobile.</td>
+                                            <td class="py-3 px-4 text-shs-navy font-bold bg-shs-gold/10 leading-relaxed">Phê duyệt ngân sách bổ sung khẩn cấp thuê ngoài 01 nhân sự thiết kế UI/UX ngắn hạn (Outsource) để hoàn thiện bản Web trong tháng 6.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 10: NEXT STEPS & KPIS -->
+                    <div id="slide-10" class="slide-transition w-full hidden">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <h3 class="text-2xl font-bold text-shs-navy">Kế Hoạch Hành Động & KPIs Mục Tiêu Tháng 6</h3>
+                                <span class="text-xs text-slate-400 uppercase tracking-widest">Kế hoạch triển khai</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-gradient-to-br from-slate-50 to-slate-100/50 p-6 rounded-xl border border-slate-200/80 shadow-sm space-y-4">
+                                    <div class="flex items-center space-x-2.5">
+                                        <span class="w-7 h-7 rounded-full bg-shs-navy text-white text-xs flex items-center justify-center font-bold">1</span>
+                                        <h4 class="font-bold text-slate-800 text-sm">WealthTech & Báo Cáo Số</h4>
+                                    </div>
+                                    <ul class="text-xs text-slate-600 space-y-2.5 list-disc pl-4 text-justify">
+                                        <li><strong>Bond IPO Phase 1:</strong> Hoàn tất ký trình duyệt các điều kiện pháp lý để chính thức go-live rộng rãi tới KH cá nhân trong tuần đầu tháng 6/2026.</li>
+                                        <li><strong>Dashboard Kinh doanh V1:</strong> Kết hợp cùng CNTT hoàn thành luồng đồng bộ dữ liệu vào Data Mart để bàn giao bản báo cáo động đầu tiên cho CEO trước ngày 15/06.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-slate-50 to-slate-100/50 p-6 rounded-xl border border-slate-200/80 shadow-sm space-y-4">
+                                    <div class="flex items-center space-x-2.5">
+                                        <span class="w-7 h-7 rounded-full bg-shs-navy text-white text-xs flex items-center justify-center font-bold">2</span>
+                                        <h4 class="font-bold text-slate-800 text-sm">Hệ Sinh Thái & Core 2</h4>
+                                    </div>
+                                    <ul class="text-xs text-slate-600 space-y-2.5 list-disc pl-4 text-justify">
+                                        <li><strong>Đàm phán SHB:</strong> Chuẩn bị sẵn phương án tối giản để chốt dứt điểm luồng TnC chia sẻ thông tin KH vào cuộc họp ngày 02/06 nếu phương án gán mã môi giới tự động bị phía SHB từ chối do vấn đề kỹ thuật.</li>
+                                        <li><strong>Core Phase 2:</strong> Tổ chức cuộc họp kick-off toàn công ty để thống nhất Roadmap triển khai chi tiết cho các mốc bàn giao đến tháng 9.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-slate-50 to-slate-100/50 p-6 rounded-xl border border-slate-200/80 shadow-sm space-y-4">
+                                    <div class="flex items-center space-x-2.5">
+                                        <span class="w-7 h-7 rounded-full bg-shs-navy text-white text-xs flex items-center justify-center font-bold">3</span>
+                                        <h4 class="font-bold text-slate-800 text-sm">Sản Phẩm & Kaizen Trải Nghiệm</h4>
+                                    </div>
+                                    <ul class="text-xs text-slate-600 space-y-2.5 list-disc pl-4 text-justify">
+                                        <li><strong>Thư viện kiến thức:</strong> Thực hiện nghiệm thu bàn giao và chuyển giao toàn bộ file thiết kế UI/UX vào ngày 03/06 đúng hạn cam kết.</li>
+                                        <li><strong>Kaizen UI/UX:</strong> Đẩy nhanh tiến độ hoàn thành thiết kế UX luồng đặt lệnh nhanh trên App di động để đưa vào lập trình UAT trong tháng 6.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Slide Navigation Controls Footer (No Print) -->
+                <div class="no-print bg-slate-50 px-6 sm:px-10 py-5 border-t border-slate-100 flex justify-between items-center">
+                    <button onclick="prevSlide()" class="px-4 py-2 bg-white border border-slate-300 rounded-lg text-slate-700 text-xs font-semibold hover:bg-slate-100 active:scale-95 transition flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                        Slide trước
+                    </button>
+                    <!-- Small Indicator dots -->
+                    <div class="hidden sm:flex space-x-2" id="slide-dots"></div>
+                    
+                    <button onclick="nextSlide()" class="px-4 py-2 bg-shs-navy text-white rounded-lg text-xs font-semibold hover:bg-shs-navy/90 active:scale-95 transition flex items-center">
+                        Slide tiếp theo
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide Progress Bar (No Print) -->
+            <div class="no-print mt-4 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="slide-progress" class="progress-bar-fill h-full bg-gradient-to-r from-shs-navy to-shs-orange" style="width: 10%"></div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- INTERACTIVE DASHBOARD VIEW MODE                -->
+        <!-- ============================================== -->
+        <div id="dashboard-mode-container" class="hidden w-full space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow border border-slate-200/80">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-slate-100 pb-4 mb-6 gap-4">
+                    <div>
+                        <h3 class="text-xl font-black text-shs-navy">Bảng Quản Lý & Phân Tích Tiến Độ Kế Hoạch Số Q2/2026</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Hệ thống tra cứu chi tiết số liệu của 14 dự án trọng điểm và 4 nhiệm vụ cải tiến Kaizen</p>
+                    </div>
+                    <!-- Status Filter Badges -->
+                    <div class="flex flex-wrap gap-2" id="dashboard-filters">
+                        <button onclick="filterDashboard('ALL')" class="filter-btn active bg-shs-navy text-white text-[11px] px-3 py-1.5 rounded-lg font-bold transition shadow-sm">Tất cả (18)</button>
+                        <button onclick="filterDashboard('Done')" class="filter-btn bg-slate-100 hover:bg-emerald-50 text-emerald-800 text-[11px] px-3 py-1.5 rounded-lg font-bold transition">Done (4)</button>
+                        <button onclick="filterDashboard('Đang triển khai')" class="filter-btn bg-slate-100 hover:bg-blue-50 text-blue-800 text-[11px] px-3 py-1.5 rounded-lg font-bold transition">Đang làm (6)</button>
+                        <button onclick="filterDashboard('Chờ phụ thuộc')" class="filter-btn bg-slate-100 hover:bg-amber-50 text-amber-800 text-[11px] px-3 py-1.5 rounded-lg font-bold transition">Chờ phụ thuộc (4)</button>
+                        <button onclick="filterDashboard('Điểm nghẽn')" class="filter-btn bg-slate-100 hover:bg-rose-50 text-rose-800 text-[11px] px-3 py-1.5 rounded-lg font-bold transition">Điểm nghẽn (3)</button>
+                        <button onclick="filterDashboard('Chưa kick off')" class="filter-btn bg-slate-100 text-slate-600 text-[11px] px-3 py-1.5 rounded-lg font-bold transition">Chưa khởi động (1)</button>
+                    </div>
+                </div>
+
+                <!-- Interactive Data Grid -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full text-left border-collapse text-xs" id="dashboard-table">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                                <th class="py-3 px-4 font-bold w-12 text-center">STT</th>
+                                <th class="py-3 px-4 font-bold w-48">Mảng nghiệp vụ</th>
+                                <th class="py-3 px-4 font-bold w-52">Dự án / Nhiệm vụ</th>
+                                <th class="py-3 px-4 font-bold w-24 text-center">Độ ưu tiên</th>
+                                <th class="py-3 px-4 font-bold w-24 text-center">Mốc hạn</th>
+                                <th class="py-3 px-4 font-bold w-36 text-center">Trạng thái</th>
+                                <th class="py-3 px-4 font-bold">Cập nhật tiến độ chi tiết (29/05 & Kế thừa 22/05)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200" id="dashboard-table-body">
+                            <!-- Loaded via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- DOCUMENT/PRINT VIEW MODE                       -->
+        <!-- ============================================== -->
+        <div id="document-mode-container" class="hidden w-full space-y-8 bg-white p-6 sm:p-12 rounded-2xl shadow border border-slate-200 max-w-4xl mx-auto">
+            
+            <!-- Document Header -->
+            <div class="border-b-2 border-shs-navy pb-6 text-center space-y-2">
+                <p class="text-xs font-bold tracking-widest text-slate-400 uppercase">CÔNG TY CỔ PHẦN CHỨNG KHOÁN SÀI GÒN - HÀ NỘI (SHS)</p>
+                <h1 class="text-2xl sm:text-3xl font-black text-shs-navy">BÁO CÁO TOÀN DIỆN THỰC TRẠNG ROADMAP SỐ THÁNG 5/2026</h1>
+                <p class="text-xs text-slate-500 italic">Số liệu chốt ngày 29/05/2026 - Tự động đồng bộ và bổ khuyết từ mốc 22/05/2026. Trình Ban Tổng Giám đốc.</p>
+            </div>
+
+            <!-- Executive Summary -->
+            <section class="space-y-4">
+                <h3 class="text-md font-bold text-shs-navy border-b border-slate-200 pb-1 uppercase tracking-wider">I. Đánh giá Tổng Quan & Hiệu Quả Thực Hiện</h3>
+                <p class="text-slate-700 text-xs leading-relaxed text-justify">
+                    Tháng 5/2026 ghi nhận mốc chuyển dịch công nghệ mang tính bước ngoặt đối với Khối Digital - SHS khi chính thức go-live thành công hệ thống giao dịch lõi mới (Core Flex Phase 1) vào ngày 25/05/2026, giải quyết dứt điểm rủi ro nghẽn lệnh hệ thống cũ. Song song với đó, việc hoàn thành chuyển đổi trơn tru 3 tháng dữ liệu giao dịch lịch sử và mở luồng liên thông eKYC mở tài khoản chéo từ ngân hàng mẹ SHB (đạt tăng trưởng ổn định trên 15%) đã đặt bệ phóng vững chắc cho các sản phẩm số của SHS trong các quý tiếp theo.
+                </p>
+                <p class="text-slate-700 text-xs leading-relaxed text-justify">
+                    Hệ thống ghi nhận tổng số <strong>18 hạng mục công việc lớn</strong> (bao gồm 14 dự án Roadmap Q2 và 4 chiến dịch Kaizen cải tiến giao diện tương tác). Kết quả ghi nhận: <strong>4 hạng mục đã golive hoàn chỉnh (Done)</strong>, <strong>6 hạng mục đang bám sát tiến độ lập trình</strong>, <strong>4 hạng mục vướng mốc bàn giao nghiệp vụ/thiết kế đối tác (Chờ phụ thuộc)</strong>, <strong>3 điểm nghẽn lớn (Blockers)</strong> cần sự can thiệp và hỗ trợ trực tiếp từ Ban TGĐ để đàm phán, và <strong>1 hạng mục lùi thời hạn kick-off</strong>.
+                </p>
+                
+                <!-- Status counts block -->
+                <div class="grid grid-cols-5 gap-3 text-center text-[10px] font-bold">
+                    <div class="p-3 border rounded-xl bg-emerald-50 text-emerald-800 border-emerald-100 shadow-sm"><p class="font-black text-xl mb-0.5">4</p><p>Hoàn thành</p></div>
+                    <div class="p-3 border rounded-xl bg-blue-50 text-blue-800 border-blue-100 shadow-sm"><p class="font-black text-xl mb-0.5">6</p><p>Đang làm</p></div>
+                    <div class="p-3 border rounded-xl bg-amber-50 text-amber-800 border-amber-100 shadow-sm"><p class="font-black text-xl mb-0.5">4</p><p>Chờ phụ thuộc</p></div>
+                    <div class="p-3 border rounded-xl bg-rose-50 text-rose-800 border-rose-100 shadow-sm"><p class="font-black text-xl mb-0.5">3</p><p>Điểm nghẽn</p></div>
+                    <div class="p-3 border rounded-xl bg-slate-100 text-slate-800 border-slate-200 shadow-sm"><p class="font-black text-xl mb-0.5">1</p><p>Chưa bắt đầu</p></div>
+                </div>
+            </section>
+
+            <!-- Detailed Projects List -->
+            <section class="space-y-4 print-break">
+                <h3 class="text-md font-bold text-shs-navy border-b border-slate-200 pb-1 uppercase tracking-wider">II. Chi Tiết Tiến Độ Thực Hiện Theo Mảng Nghiệp Vụ</h3>
+                <div id="document-project-list" class="space-y-5">
+                    <!-- Loaded via JS in detailed text layout -->
+                </div>
+            </section>
+
+            <!-- Risk Table & Actions -->
+            <section class="space-y-4">
+                <h3 class="text-md font-bold text-shs-orange border-b border-slate-200 pb-1 uppercase tracking-wider">III. Đề Xuất Trình CEO Giải Quyết Điểm Nghẽn</h3>
+                <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 text-slate-700">
+                            <tr>
+                                <th class="p-3 font-bold border-b w-[25%]">Vấn đề cốt lõi</th>
+                                <th class="p-3 font-bold border-b w-[35%]">Ảnh hưởng trực tiếp</th>
+                                <th class="p-3 font-bold border-b text-shs-navy bg-shs-gold/20">Phương án kiến nghị gửi CEO</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-150">
+                            <tr>
+                                <td class="p-3 font-bold text-rose-700">1. Đàm phán tích hợp SHB Phase 2</td>
+                                <td class="p-3 text-slate-650 leading-relaxed">Đồng bộ phiên hạng VIP và liên kết gán môi giới bị trì hoãn do SHB kéo giãn tiến độ hỗ trợ.</td>
+                                <td class="p-3 text-shs-navy font-bold leading-relaxed bg-shs-gold/5">Kính đề nghị CEO chỉ đạo cuộc họp liên tịch với đại diện SHB để thống nhất thỏa thuận kết nối trước ngày 02/06.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-rose-700">2. Thủ tục pháp lý eKYC mới (Viettel)</td>
+                                <td class="p-3 text-slate-650 leading-relaxed">Không thể nâng cấp tính năng Face-matching, duy trì tỷ lệ rớt khi đăng ký của người dùng mới ở mức cao.</td>
+                                <td class="p-3 text-shs-navy font-bold leading-relaxed bg-shs-gold/5">CEO liên hệ trực tiếp Ban điều hành Viettel để thúc đối tác sớm ký kết khung thỏa thuận cơ sở với Bộ Công An.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-rose-700">3. Thiếu dữ liệu mảng Dashboard V1</td>
+                                <td class="p-3 text-slate-650 leading-relaxed">Ban lãnh đạo tạm thời thiếu công cụ báo cáo trực quan tức thời để đánh giá hiệu quả kinh doanh sau khi golive Core mới.</td>
+                                <td class="p-3 text-shs-navy font-bold leading-relaxed bg-shs-gold/5">Chỉ đạo CNTT ưu tiên tài nguyên máy chủ báo cáo và cấp quyền chuyển giao dữ liệu kinh doanh thô sang Data Mart.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Document Footer -->
+            <div class="pt-8 border-t border-slate-200 flex justify-between text-xs text-slate-400">
+                <p>Nguồn tham chiếu dữ liệu gốc: Roadmap 2026 SHS (1).xlsx</p>
+                <p class="font-bold">Trưởng Khối Digital ký duyệt</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER (NO-PRINT) -->
+    <footer class="no-print bg-slate-900 text-slate-400 text-center py-4 text-xs border-t border-slate-800 mt-8">
+        <p>© 2026 Công ty Cổ phần Chứng khoán Sài Gòn - Hà Nội (SHS). Hệ thống quản trị nội bộ Khối Digital.</p>
+        <p class="mt-1 text-slate-500">Mọi thay đổi dữ liệu cần được cập nhật vào tệp gốc trước khi đồng bộ lên máy chủ báo cáo.</p>
+    </footer>
+
+    <!-- JS FOR PRESENTATION & INTERACTION & POWERPOINT EXPORT -->
+    <script>
+        // MASTER DATA STRUCTURE WITH STEP-BY-STEP MILESTONES
+        const rawRoadmapData = [
+            {
+                stt: 1,
+                priority: "Must-do",
+                objective: "Nền tảng giao dịch",
+                project: "Core Phase 1",
+                desc: "Thay thế hệ thống lõi cũ để nâng cao năng lực chịu tải lệnh",
+                deliverable: "Go-live Core mới và tích hợp thông suốt với các phân hệ giao dịch cơ bản",
+                owner: "Ban dự án (ThanhPT)",
+                target: "Tháng 5/2026",
+                status: "Done",
+                update: "Đã go-live thành công ngày 25/05/2026. Hệ thống hoạt động thông suốt, tải lệnh mượt mà gấp 5 lần hệ thống cũ.",
+                milestones: { brd: "done", design: "done", dev: "done", uat: "done", golive: "done" }
+            },
+            {
+                stt: 2,
+                priority: "Must-do",
+                objective: "Nền tảng giao dịch",
+                project: "Core - Dữ liệu lịch sử",
+                desc: "Đảm bảo tính liên tục của dữ liệu tài sản và lệnh cho KH",
+                deliverable: "Di trú an toàn toàn bộ dữ liệu lịch sử tài sản và giao dịch trong vòng 3 tháng gần nhất",
+                owner: "Ban dự án (ThanhPT)",
+                target: "Tháng 5/2026",
+                status: "Done",
+                update: "Hoàn tất di trú dữ liệu ngày 25/05/2026. Số liệu khớp 100%, không phát sinh sai lệch số dư của khách hàng.",
+                milestones: { brd: "done", design: "done", dev: "done", uat: "done", golive: "done" }
+            },
+            {
+                stt: 3,
+                priority: "Must-do",
+                objective: "Nền tảng giao dịch",
+                project: "Core Phase 2",
+                desc: "Tích hợp các module bổ trợ nghiệp vụ nâng cao",
+                deliverable: "Đồng bộ hóa các nền tảng Phase 2 và chuẩn hóa quy tắc nghiệp vụ liên phòng ban",
+                owner: "Ban dự án (ThanhPT)",
+                target: "Tháng 9/2026",
+                status: "Chưa kick off",
+                update: "Chưa khởi động. Đang chuẩn bị nhân sự và phân định rõ vai trò quản lý dự án để đưa vào trọng tâm triển khai của Q2.",
+                milestones: { brd: "pending", design: "pending", dev: "pending", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: 4,
+                priority: "Must-do",
+                objective: "Nền tảng WealthTech",
+                project: "Bond IPO (Trái phiếu sơ cấp)",
+                desc: "Khai mở kênh phân phối sản phẩm nợ cho nhà đầu tư cá nhân",
+                deliverable: "Phase 1: Go-live nền tảng trực tuyến hỗ trợ đăng ký mua Trái phiếu sơ cấp",
+                owner: "TT SP - KienBM (TungNH)",
+                target: "Tháng 5/2026",
+                status: "Đang triển khai",
+                update: "Phòng Sản phẩm đầu tư cùng Trung tâm Chiến lược bán hàng đang hoàn thiện tờ trình phê duyệt điều kiện phân phối. Dự kiến chính thức go-live trong tuần đầu tháng 6/2026.",
+                milestones: { brd: "done", design: "done", dev: "done", uat: "done", golive: "active" }
+            },
+            {
+                stt: 5,
+                priority: "Must-do",
+                objective: "Nền tảng WealthTech",
+                project: "Bond riêng lẻ (Sbond)",
+                desc: "Hệ thống quản lý nội bộ trái phiếu riêng lẻ Sbond",
+                deliverable: "Phase 2: Hoàn thiện nền tảng nội bộ phục vụ hoạt động quản lý danh mục SBond",
+                owner: "TT SP - KienBM (TungNH)",
+                target: "Tháng 6/2026",
+                status: "Chờ phụ thuộc",
+                update: "Vướng mốc UAT Nghiệp vụ. Nghiệp vụ hiện đang dùng tạm module TPRL trên Core Flex mới. Phòng Sản phẩm đầu tư cần sớm ngồi lại với Nghiệp vụ để thống nhất cách tính phí lưu ký và biểu mẫu trước khi golive.",
+                milestones: { brd: "done", design: "done", dev: "done", uat: "active", golive: "pending" }
+            },
+            {
+                stt: 6,
+                priority: "Must-do",
+                objective: "Nền tảng WealthTech",
+                project: "Money Market - Sinh lời nhàn tênh",
+                desc: "Sản phẩm tối ưu dòng tiền ngắn hạn hợp tác với ngân hàng SHB",
+                deliverable: "Phase 1: Go-live sản phẩm tiền gửi tối ưu dòng tiền nhàn rỗi cho nhà đầu tư",
+                owner: "TT SP - PhuongPTH (TungNH)",
+                target: "Tháng 5/2026",
+                status: "Done",
+                update: "Đã go-live diện hẹp nội bộ thành công ngày 20/05/2026. Hệ thống tính toán lợi suất chạy ổn định, đang chuẩn bị thủ tục truyền thông đại chúng.",
+                milestones: { brd: "done", design: "done", dev: "done", uat: "done", golive: "done" }
+            },
+            {
+                stt: 7,
+                priority: "Must-do",
+                objective: "Kết nối hệ sinh thái",
+                project: "SHBxSHS Phase 1 (Mở TK chéo)",
+                desc: "Liên kết eKYC trực tiếp trên Mobile App SHB",
+                deliverable: "Go-live luồng mở tài khoản chứng khoán SHS ngay trên ứng dụng ngân hàng SHB",
+                owner: "TT SP - PhuongPTH (TungNH)",
+                target: "Tháng 5/2026",
+                status: "Done",
+                update: "Đã go-live thành công ngày 05/05/2026. Tỷ lệ mở tài khoản mới từ kênh số SHB ghi nhận mức tăng trưởng trên 15% ngay trong tuần đầu tiên.",
+                milestones: { brd: "done", design: "done", dev: "done", uat: "done", golive: "done" }
+            },
+            {
+                stt: 8,
+                priority: "High",
+                objective: "Kết nối hệ sinh thái",
+                project: "SHBxSHS Phase 2 (Đồng bộ dữ liệu)",
+                desc: "Đồng bộ phân hạng KH VIP và luồng gán môi giới quản lý tự động",
+                deliverable: "Liên thông gán mã Môi giới khi KH mở tài khoản chéo & áp dụng phiên hạng tương ứng từ SHB sang SHS",
+                owner: "TT SP - PhuongPTH (MaiNT)",
+                target: "Tháng 6/2026",
+                status: "Điểm nghẽn",
+                update: "Nghẽn đàm phán kỹ thuật. SHB phối hợp rất hạn chế, lấy lý do bảo mật để kéo dài thời gian. Mốc 2/6 CNTT SHS bàn giao tài liệu kết nối để chốt giải pháp: nếu đáp ứng được sẽ gán mã MG, nếu không chỉ đổi TnC chia sẻ thông tin KH.",
+                milestones: { brd: "done", design: "done", dev: "active", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: 9,
+                priority: "High",
+                objective: "Kết nối hệ sinh thái",
+                project: "SHBxSHS - Nhúng Deeplink mở TK SHB",
+                desc: "Thêm liên kết đăng ký tài khoản thanh toán SHB trên App SHS",
+                deliverable: "Tích hợp luồng deep-link đăng ký thẻ/mở tài khoản thanh toán SHB trực tiếp trên app SH Smart",
+                owner: "TT SP - PhuongPTH (TungNH)",
+                target: "Tháng 6/2026",
+                status: "Chờ phụ thuộc",
+                update: "Đã phát triển hoàn chỉnh bản thử nghiệm UAT và gắn thành công deep-link. Đang tạm dừng chờ bộ phận Marketing của SHB cung cấp bộ Banner truyền thông để cấu hình lên Store.",
+                milestones: { brd: "done", design: "done", dev: "done", uat: "done", golive: "pending" }
+            },
+            {
+                stt: 10,
+                priority: "Must-do",
+                objective: "Nền tảng giao dịch",
+                project: "Nâng cấp eKYC (Đối tác Viettel)",
+                desc: "Nâng cấp công nghệ Face matching và Liveness mới giảm lỗi rớt eKYC",
+                deliverable: "Hoàn tất nâng cấp giải thuật định danh điện tử, giảm tỷ lệ drop khi mở tài khoản số",
+                owner: "Digital - QuyetNM (MaiNT)",
+                target: "Tháng 6/2026",
+                status: "Điểm nghẽn",
+                update: "Rủi ro chậm tiến độ rất cao do đối tác Viettel chưa hoàn thành thủ tục ký kết hợp đồng dịch vụ kiểm tra dữ liệu với Bộ Công An, dẫn đến chưa dựng được khung hợp đồng thương mại với SHS.",
+                milestones: { brd: "done", design: "active", dev: "pending", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: 11,
+                priority: "High",
+                objective: "Quản trị kinh doanh",
+                project: "Thư viện kiến thức",
+                desc: "Số hóa kho tài liệu phân tích và hướng dẫn đầu tư",
+                deliverable: "Cổng kiến thức tra cứu tập trung hỗ trợ Môi giới và khách hàng cá nhân tự học",
+                owner: "Digital - GiangNH2 (ThanhPT)",
+                target: "Tháng 7/2026",
+                status: "Đang triển khai",
+                update: "Đã hoàn thành phê duyệt tài liệu BRD và thống nhất luồng đi người dùng. Tiến độ thiết kế UI/UX đang hoàn thành những màn hình cuối cùng. Cam kết chuyển giao (Transfer) đúng hẹn ngày 03/06/2026.",
+                milestones: { brd: "done", design: "active", dev: "pending", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: 12,
+                priority: "Must-do",
+                objective: "Quản trị kinh doanh",
+                project: "Dashboard Kinh Doanh V1",
+                desc: "Cơ sở dữ liệu và bảng theo dõi chỉ số hiệu quả kinh doanh trình CEO",
+                deliverable: "Thiết lập Database gọn nhẹ và Dashboard theo dõi hiệu quả kinh doanh Real-time",
+                owner: "Digital - MinhDPH (Lepth)",
+                target: "Tháng 6/2026",
+                status: "Điểm nghẽn",
+                update: "Dữ liệu báo cáo tuần tạm thời đã hoạt động. Tuy nhiên đang bị nghẽn do chờ bộ phận CNTT chuyển giao dữ liệu lịch sử và dữ liệu hiện tại vào Data Mart (do nguồn lực CNTT đang tập trung vá lỗi Core mới sau golive).",
+                milestones: { brd: "done", design: "done", dev: "active", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: 13,
+                priority: "High",
+                objective: "Quản trị kinh doanh",
+                project: "Margin Elite trực tuyến",
+                desc: "Đưa luồng đăng ký gói Margin S30/S50/S70 lên App",
+                deliverable: "Số hóa quy trình đăng ký gói Margin Elite và phê duyệt tự động trên app SH Smart",
+                owner: "TT SP - PhuongPTH (MaiNT)",
+                target: "Tháng 7/2026",
+                status: "Chờ phụ thuộc",
+                update: "Đang tạm dừng chờ bộ phận Phát triển Sản phẩm của Khối Kinh doanh cung cấp tài liệu nghiệp vụ chi tiết mô tả thuật toán cấp hạn mức và chấm điểm khách hàng.",
+                milestones: { brd: "active", design: "pending", dev: "pending", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: 14,
+                priority: "Must-do",
+                objective: "Data Warehouse",
+                project: "Kho dữ liệu tập trung DWH",
+                desc: "Đồng nhất dữ liệu phân mảnh từ các phân hệ cũ và mới",
+                deliverable: "Xây dựng Data Warehouse đồng bộ luồng tải dữ liệu tự động ETL hoàn chỉnh",
+                owner: "CNTT - TungNH (TungNH)",
+                target: "Tháng 9/2026",
+                status: "Đang triển khai",
+                update: "Đã phê duyệt xong thiết kế kiến trúc phân tầng dữ liệu logic. CNTT đang hoàn thiện tờ trình xin phê duyệt mua sắm hạ tầng máy chủ vật lý phục vụ dự án.",
+                milestones: { brd: "done", design: "active", dev: "pending", uat: "pending", golive: "pending" }
+            }
+        ];
+
+        const kaizenData = [
+            {
+                stt: "K1",
+                priority: "Medium",
+                objective: "Kaizen trải nghiệm",
+                project: "SH Smart App (KH cá nhân)",
+                desc: "Tối ưu hóa các điểm chạm đặt lệnh và bảng giá trực tuyến",
+                deliverable: "Tái thiết kế trang chủ, bảng giá trực quan và rút ngắn quy trình đặt lệnh nhanh",
+                owner: "Đội CX",
+                target: "27/05/2026",
+                status: "Đang triển khai",
+                update: "CX đang hoàn thiện thiết kế UX luồng đặt lệnh bao trùm các nghiệp vụ: Lệnh cơ sở (Thường, điều kiện) và Lệnh Phái sinh. Tiến độ bám sát mốc chuyển giao dự kiến.",
+                milestones: { brd: "done", design: "active", dev: "pending", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: "K2",
+                priority: "Medium",
+                objective: "Kaizen trải nghiệm",
+                project: "SH Smart Web (KH cá nhân)",
+                desc: "Nâng cấp giao diện giao dịch bản trình duyệt",
+                deliverable: "Revamp bảng đặt lệnh & UI bảng giá (nâng độ tương phản, cỡ chữ màn hình lớn)",
+                owner: "Đội CX",
+                target: "27/05/2026",
+                status: "Chờ phụ thuộc",
+                update: "Do thiếu hụt nhân sự thiết kế UI/UX hỗ trợ golive Core, dự án đã thống nhất tạm dừng triển khai phiên bản Web để tập trung tối đa hoàn thiện bản App di động trước.",
+                milestones: { brd: "done", design: "active", dev: "pending", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: "K3",
+                priority: "Medium",
+                objective: "Kaizen trải nghiệm",
+                project: "SHA App (Môi giới)",
+                desc: "Thêm tính năng ủy quyền khách hàng trực tuyến",
+                deliverable: "Thiết kế màn hình phê duyệt và theo dõi ủy quyền trực tiếp trên Mobile App nội bộ",
+                owner: "Đội CX",
+                target: "27/05/2026",
+                status: "Đang triển khai",
+                update: "CX đang tiến hành vẽ chi tiết giao diện UX theo tài liệu đặc tả nghiệp vụ đã được Khối Vận hành ký duyệt. Cam kết đúng mốc tiến độ bàn giao.",
+                milestones: { brd: "done", design: "active", dev: "pending", uat: "pending", golive: "pending" }
+            },
+            {
+                stt: "K4",
+                priority: "Medium",
+                objective: "Kaizen trải nghiệm",
+                project: "SHA Web (Môi giới)",
+                desc: "Cải tiến giao diện đặt lệnh hộ và quản trị tài sản",
+                deliverable: "Tối ưu hóa bảng hiển thị danh mục tài sản KH chi tiết và cổng thông tin phí giao dịch",
+                owner: "Đội CX",
+                target: "27/05/2026",
+                status: "Đang triển khai",
+                update: "Thiết kế đang được on-going căn chỉnh và tối ưu hóa liên tục hàng ngày theo phản hồi trực tiếp từ Product Owner để bám sát logic của hệ thống Core mới.",
+                milestones: { brd: "done", design: "active", dev: "pending", uat: "pending", golive: "pending" }
+            }
+        ];
+
+        const allProjects = [...rawRoadmapData, ...kaizenData];
+
+        // PRESENTATION CAROUSEL CORE ENGINE
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(index) {
+            if (index < 1 || index > totalSlides) return;
+            
+            for (let i = 1; i <= totalSlides; i++) {
+                const el = document.getElementById(`slide-${i}`);
+                if (el) el.classList.replace('block', 'hidden');
+            }
+            
+            const activeEl = document.getElementById(`slide-${index}`);
+            if (activeEl) {
+                activeEl.classList.replace('hidden', 'block');
+                activeEl.classList.add('opacity-0', 'scale-98');
+                setTimeout(() => {
+                    activeEl.classList.remove('opacity-0', 'scale-98');
+                }, 40);
+            }
+            
+            currentSlide = index;
+            updateSlideUI();
+        }
+
+        function updateSlideUI() {
+            document.getElementById('slide-counter').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+            
+            const dotsContainer = document.getElementById('slide-dots');
+            dotsContainer.innerHTML = '';
+            for (let i = 1; i <= totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.onclick = () => showSlide(i);
+                dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'bg-shs-orange w-8 shadow-sm' : 'bg-slate-300 hover:bg-slate-400'}`;
+                dotsContainer.appendChild(dot);
+            }
+
+            const pct = (currentSlide / totalSlides) * 100;
+            document.getElementById('slide-progress').style.width = `${pct}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+            else showSlide(1);
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) showSlide(currentSlide - 1);
+            else showSlide(totalSlides);
+        }
+
+        // FULLSCREEN BROWSER TOGGLE
+        function toggleFullScreen() {
+            const el = document.getElementById('slide-mode-container');
+            if (!document.fullscreenElement) {
+                el.requestFullscreen().catch(err => {
+                    console.log(`Lỗi chế độ toàn màn hình: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // VIEW MODE SWITCHER
+        function switchMode(mode) {
+            const slideBtn = document.getElementById('btn-slide-mode');
+            const dashBtn = document.getElementById('btn-dashboard-mode');
+            const docBtn = document.getElementById('btn-document-mode');
+
+            const slideCont = document.getElementById('slide-mode-container');
+            const dashCont = document.getElementById('dashboard-mode-container');
+            const docCont = document.getElementById('document-mode-container');
+
+            [slideBtn, dashBtn, docBtn].forEach(b => {
+                b.className = "px-4 py-2 rounded-lg text-sm font-semibold transition bg-shs-navy/80 hover:bg-shs-navy/50 text-white flex items-center border border-shs-gold/20";
+            });
+
+            slideCont.classList.add('hidden');
+            dashCont.classList.add('hidden');
+            docCont.classList.add('hidden');
+
+            if (mode === 'slide') {
+                slideBtn.className = "px-4 py-2 rounded-lg text-sm font-semibold transition bg-shs-gold text-shs-navy flex items-center shadow-md";
+                slideCont.classList.remove('hidden');
+            } else if (mode === 'dashboard') {
+                dashBtn.className = "px-4 py-2 rounded-lg text-sm font-semibold transition bg-shs-gold text-shs-navy flex items-center shadow-md";
+                dashCont.classList.remove('hidden');
+                renderDashboard();
+            } else if (mode === 'document') {
+                docBtn.className = "px-4 py-2 rounded-lg text-sm font-semibold transition bg-shs-gold text-shs-navy flex items-center shadow-md";
+                docCont.classList.remove('hidden');
+                renderDocument();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            const slideCont = document.getElementById('slide-mode-container');
+            if (slideCont && !slideCont.classList.contains('hidden')) {
+                if (event.key === "ArrowRight" || event.key === "Space") {
+                    event.preventDefault();
+                    nextSlide();
+                } else if (event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    prevSlide();
+                }
+            }
+        });
+
+        // RENDER INTERACTIVE ROADMAP DASHBOARD GRID
+        let activeFilter = 'ALL';
+        function filterDashboard(status) {
+            activeFilter = status;
+            
+            const filterButtons = document.querySelectorAll('#dashboard-filters button');
+            filterButtons.forEach(btn => {
+                if (btn.innerText.includes(status === 'ALL' ? 'Tất cả' : status)) {
+                    btn.className = "filter-btn active bg-shs-navy text-white text-[11px] px-3 py-1.5 rounded-lg font-bold transition shadow-sm";
+                } else {
+                    btn.className = "filter-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-[11px] px-3 py-1.5 rounded-lg font-bold transition";
+                }
+            });
+
+            renderDashboard();
+        }
+
+        function generateMilestoneStepsHTML(milestones) {
+            const steps = [
+                { key: 'brd', label: 'BRD' },
+                { key: 'design', label: 'UX/UI' },
+                { key: 'dev', label: 'Dev' },
+                { key: 'uat', label: 'UAT' },
+                { key: 'golive', label: 'Live' }
+            ];
+
+            return `
+                <div class="flex items-center space-x-1 mt-1.5">
+                    ${steps.map(step => {
+                        let dotColor = "bg-slate-200 text-slate-400 border border-slate-300";
+                        if (milestones[step.key] === "done") {
+                            dotColor = "bg-emerald-500 text-white font-bold border border-emerald-600 shadow-sm";
+                        } else if (milestones[step.key] === "active") {
+                            dotColor = "bg-shs-orange text-white font-bold animate-pulse border border-shs-orange/70 shadow-sm";
+                        }
+                        return `
+                            <span class="text-[9px] px-1.5 py-0.5 rounded-md ${dotColor}">
+                                ${step.label}
+                            </span>
+                        `;
+                    }).join('<span class="text-slate-300 text-[8px]">></span>')}
+                </div>
+            `;
+        }
+
+        function renderDashboard() {
+            const tableBody = document.getElementById('dashboard-table-body');
+            tableBody.innerHTML = '';
+
+            const filtered = allProjects.filter(item => {
+                if (activeFilter === 'ALL') return true;
+                return item.status === activeFilter;
+            });
+
+            filtered.forEach(item => {
+                let badgeClass = "bg-slate-100 text-slate-700";
+                if (item.status === 'Done') badgeClass = "bg-emerald-100 text-emerald-800 font-bold border border-emerald-250";
+                else if (item.status === 'Đang triển khai') badgeClass = "bg-blue-100 text-blue-800 font-semibold";
+                else if (item.status === 'Chờ phụ thuộc') badgeClass = "bg-amber-100 text-amber-800 font-semibold";
+                else if (item.status === 'Điểm nghẽn') badgeClass = "bg-rose-100 text-rose-800 font-extrabold border border-rose-250";
+
+                let priorityBadge = "bg-slate-100 text-slate-500";
+                if (item.priority === 'Must-do') priorityBadge = "bg-rose-50 text-rose-600 border border-rose-100 font-bold";
+                else if (item.priority === 'High') priorityBadge = "bg-orange-50 text-orange-600 font-semibold";
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition text-xs";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-mono font-bold text-slate-400 text-center border-r border-slate-100">${item.stt}</td>
+                    <td class="py-3 px-4 font-bold text-slate-800">${item.objective}</td>
+                    <td class="py-3 px-4">
+                        <div class="font-extrabold text-shs-navy text-sm">${item.project}</div>
+                        <div class="text-[10px] text-slate-400 mt-1">${item.desc}</div>
+                        ${generateMilestoneStepsHTML(item.milestones)}
+                    </td>
+                    <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-[10px] ${priorityBadge}">${item.priority}</span></td>
+                    <td class="py-3 px-4 text-center font-bold text-slate-500">${item.target}</td>
+                    <td class="py-3 px-4 text-center"><span class="px-2.5 py-1 rounded-full text-[10px] ${badgeClass}">${item.status}</span></td>
+                    <td class="py-3 px-4 leading-relaxed text-slate-650 text-justify border-l border-slate-100">
+                        ${item.update}
+                        ${item.status === 'Điểm nghẽn' ? `<div class="text-[10px] text-rose-600 font-extrabold mt-1.5 p-1.5 bg-rose-50 rounded border border-rose-100">⚠️ Nghẽn phối hợp/Pháp lý. Đang chờ ý kiến CEO để tháo gỡ khó khăn.</div>` : ''}
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // RENDER DETAILED DOCUMENT FOR PDF EXPORT & PRINT
+        function renderDocument() {
+            const listContainer = document.getElementById('document-project-list');
+            listContainer.innerHTML = '';
+
+            const grouped = {};
+            allProjects.forEach(item => {
+                if (!grouped[item.objective]) {
+                    grouped[item.objective] = [];
+                }
+                grouped[item.objective].push(item);
+            });
+
+            for (const [objName, items] of Object.entries(grouped)) {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = "space-y-3 border-l-4 border-shs-navy pl-4 py-1 bg-slate-50/50 p-4 rounded-r-xl border border-slate-150";
+                groupDiv.innerHTML = `<h4 class="font-black text-shs-navy text-xs uppercase tracking-wider">${objName}</h4>`;
+                
+                const itemsList = document.createElement('div');
+                itemsList.className = "space-y-4 mt-2";
+
+                items.forEach(p => {
+                    let statusLabel = `<span class="text-slate-500 font-bold">[${p.status.toUpperCase()}]</span>`;
+                    if (p.status === 'Done') statusLabel = `<span class="text-emerald-600 font-extrabold">[ĐÃ HOÀN THÀNH - GOLIVE]</span>`;
+                    else if (p.status === 'Điểm nghẽn') statusLabel = `<span class="text-rose-600 font-black animate-pulse">[ĐIỂM NGHỄN - TRÌNH CEO CAN THIỆP]</span>`;
+                    else if (p.status === 'Chờ phụ thuộc') statusLabel = `<span class="text-amber-600 font-bold">[VƯỚNG PHỤ THUỘC BÊN NGOÀI]</span>`;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = "text-xs border-b border-dashed border-slate-200 pb-3 last:border-0 last:pb-0";
+                    itemDiv.innerHTML = `
+                        <div class="flex justify-between items-start font-bold gap-4">
+                            <span class="text-slate-900 text-sm font-extrabold">${p.stt}. ${p.project} <span class="text-[10px] text-slate-400 font-normal">(${p.priority})</span></span>
+                            <span class="text-right shrink-0">${statusLabel}</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1 text-[11px] text-slate-500 italic">
+                            <p><strong>Mục tiêu:</strong> ${p.deliverable}</p>
+                            <p class="sm:text-right"><strong>Phụ trách:</strong> ${p.owner} | <strong>Thời hạn:</strong> ${p.target}</p>
+                        </div>
+                        <p class="text-slate-700 text-xs mt-2 pl-3 border-l-2 border-slate-300 text-justify leading-relaxed">
+                            <strong>Cập nhật chi tiết mới nhất:</strong> ${p.update}
+                        </p>
+                    `;
+                    itemsList.appendChild(itemDiv);
+                });
+
+                groupDiv.appendChild(itemsList);
+                listContainer.appendChild(groupDiv);
+            }
+        }
+
+        // EXPORT TO POWERPOINT (.pptx) PROGRAMMATIC ENGINE WITH CLIENT-SIDE DOWNLOAD
+        function exportToPowerPoint() {
+            const toast = document.getElementById('pptx-toast');
+            const toastText = document.getElementById('pptx-toast-text');
+            
+            // Show toast feedback
+            toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            toastText.innerText = "Đang áp dụng SHS Brand Template & định cấu hình Master Slide...";
+
+            setTimeout(() => {
+                try {
+                    let pptx;
+                    if (typeof PptxGenJS !== "undefined") {
+                        pptx = new PptxGenJS();
+                    } else if (typeof pptxgen !== "undefined") {
+                        pptx = new pptxgen();
+                    } else {
+                        throw new Error("Không thể khởi tạo PptxGenJS.");
+                    }
+
+                    // Toàn bộ tọa độ slide được thiết kế cho khung rộng 13.333 x 7.5 inch.
+                    // LAYOUT_WIDE = 13.333 x 7.5 (KHÔNG dùng LAYOUT_16x9 vì nó chỉ là 10 x 5.625 inch khiến nội dung tràn ra ngoài).
+                    pptx.defineLayout({ name: 'SHS_WIDE', width: 13.333, height: 7.5 });
+                    pptx.layout = 'SHS_WIDE';
+
+                    // Define Common Corporate Layout Elements
+                    const NAVY = '0F2C59';
+                    const GOLD = 'DAC0A3';
+                    const ORANGE = 'F26F21';
+                    const GRAY = '64748B';
+                    const LIGHT_GRAY = 'F8FAFC';
+                    const WHITE = 'FFFFFF';
+                    const RED = 'E11D48';
+
+                    // --- DEFINE SLIDE MASTERS TO PREVENT DEFAULT PLACEHOLDER BLEEDING ---
+                    // Slide Cover Master Style (matches SHS corporate cover image image_f2d15a.png)
+                    pptx.defineSlideMaster({
+                        title: "SHS_COVER",
+                        background: { color: NAVY },
+                        objects: [
+                            { rect: { x: 0, y: 0, w: "100%", h: "100%", fill: { color: NAVY } } },
+                            // Left vertical accent bar in orange
+                            { rect: { x: 0.8, y: 1.5, w: 0.12, h: 4.2, fill: { color: ORANGE } } }
+                        ]
+                    });
+
+                    // Slide Standard Content Master Style (crisp, beautiful header & footer, no generic default placeholders)
+                    pptx.defineSlideMaster({
+                        title: "SHS_CONTENT",
+                        background: { color: WHITE },
+                        objects: [
+                            // Header branding (Slogan of company on the right)
+                            { text: { text: "SHS | Kiến tạo tài chính thịnh vượng", options: { x: 8.5, y: 0.4, w: 4.0, h: 0.3, fontSize: 10, color: ORANGE, fontFace: "Arial", bold: true, align: "right" } } },
+                            { text: { text: "Trung tâm Trải nghiệm và Chuyển đổi Số", options: { x: 8.5, y: 0.7, w: 4.0, h: 0.3, fontSize: 8.5, color: GRAY, fontFace: "Arial", align: "right" } } },
+                            // Footer layout (Gold divider line and clean metadata text)
+                            { rect: { x: 0.8, y: 6.9, w: 11.7, h: 0.02, fill: { color: GOLD } } },
+                            { text: { text: "SHS DIGITAL DIVISION - ROADMAP Q2/2026", options: { x: 0.8, y: 7.0, w: 6.0, h: 0.3, fontSize: 7.5, color: GRAY, fontFace: "Arial", bold: true } } },
+                            { text: { text: "CONFIDENTIAL - TÀI LIỆU BẢO MẬT", options: { x: 8.0, y: 7.0, w: 4.5, h: 0.3, fontSize: 7.5, color: GRAY, fontFace: "Arial", bold: true, align: "right" } } }
+                        ]
+                    });
+
+                    // --- SLIDE 1: COVER ---
+                    let s1 = pptx.addSlide({ masterName: "SHS_COVER" });
+                    
+                    s1.addText('KHỐI CÔNG NGHỆ & SẢN PHẨM SỐ - SHS', {
+                        x: 1.2, y: 1.5, w: 11, h: 0.4,
+                        fontSize: 14, color: GOLD, bold: true, fontFace: "Arial", characterSpacing: 1.5
+                    });
+                    
+                    s1.addText('BÁO CÁO KẾT QUẢ CÔNG TÁC\nKHỐI DIGITAL - THÁNG 5/2026', {
+                        x: 1.2, y: 2.1, w: 11, h: 1.6,
+                        fontSize: 34, color: WHITE, bold: true, fontFace: "Arial"
+                    });
+
+                    s1.addText('Hoàn thành chuyển giao cột mốc giao dịch lõi (Core Flex), khai mở các mô-đun WealthTech sinh lợi và tháo gỡ liên kết hệ sinh thái ngân hàng SHB.', {
+                        x: 1.2, y: 3.9, w: 9, h: 0.8,
+                        fontSize: 13, color: 'CBD5E1', italic: true, fontFace: "Arial"
+                    });
+
+                    // Cover Meta Data Card
+                    s1.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 1.2, y: 4.9, w: 10.9, h: 1.3, fill: { color: '1e293b' }, line: { color: GOLD, width: 1 } });
+                    s1.addText('Trình báo cáo: Ban Tổng Giám đốc (CEO)\nTài liệu chốt: 29/05/2026\nNguồn số liệu: Roadmap 2026 SHS (1).xlsx', {
+                        x: 1.5, y: 5.0, w: 5.0, h: 1.1,
+                        fontSize: 11, color: WHITE, fontFace: "Arial"
+                    });
+                    s1.addText('BÁO CÁO CHIẾN LƯỢC Q2\nTài liệu bảo mật nội bộ', {
+                        x: 7.5, y: 5.15, w: 4.2, h: 0.8,
+                        fontSize: 12, color: GOLD, bold: true, align: 'right', fontFace: "Arial"
+                    });
+
+
+                    // --- SLIDE 2: OVERVIEW PROGRESS (Absolute pixel-perfect safe alignment) ---
+                    let s2 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s2.addText('I. TỔNG QUAN TIẾN ĐỘ THÁNG 5', { x: 0.8, y: 0.4, w: 7.5, h: 0.6, fontSize: 18, color: NAVY, bold: true, fontFace: "Arial" });
+                    s2.addText('Bức tranh phân bổ trạng thái của 18 hạng mục và kế thừa số liệu từ RoadmapQ2', { x: 0.8, y: 0.95, w: 7.5, h: 0.4, fontSize: 11, color: GRAY, fontFace: "Arial" });
+
+                    // Stat boxes (Horizontal layout, explicitly bound inside 0.8" and 12.5" margins)
+                    const stats = [
+                        { count: '4', label: 'Hoàn thành (Done)', desc: 'Đã go-live bàn giao', bg: 'ECFDF5', border: '10B981', color: '065F46' },
+                        { count: '6', label: 'Đang làm (On-going)', desc: 'Bám sát tiến độ', bg: 'EFF6FF', border: '3B82F6', color: '1E40AF' },
+                        { count: '4', label: 'Chờ phụ thuộc', desc: 'Vướng mốc bên ngoài', bg: 'FFFBEB', border: 'F59E0B', color: '92400E' },
+                        { count: '3', label: 'Điểm nghẽn (Blockers)', desc: 'CEO cần can thiệp', bg: 'FEF2F2', border: 'EF4444', color: '991B1B' },
+                        { count: '1', label: 'Chưa khởi động', desc: 'Ưu tiên lùi Q2', bg: 'F8FAFC', border: '64748B', color: '334155' }
+                    ];
+
+                    stats.forEach((item, idx) => {
+                        let xPos = 0.8 + (idx * 2.4); // width 2.1, gap 0.3. Total width = 5 * 2.1 + 4 * 0.3 = 11.7. Max boundary is 12.5. Perfect!
+                        s2.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: xPos, y: 1.5, w: 2.1, h: 2.5, fill: { color: item.bg }, line: { color: item.border, width: 1.5 } });
+                        s2.addText(item.count, { x: xPos, y: 1.6, w: 2.1, h: 0.7, fontSize: 36, bold: true, color: item.color, align: 'center', fontFace: "Arial" });
+                        s2.addText(item.label, { x: xPos + 0.05, y: 2.3, w: 2.0, h: 0.5, fontSize: 10, bold: true, color: NAVY, align: 'center', fontFace: "Arial" });
+                        s2.addText(item.desc, { x: xPos + 0.05, y: 2.9, w: 2.0, h: 0.9, fontSize: 8.5, color: GRAY, align: 'center', fontFace: "Arial" });
+                    });
+
+                    // Explanation Card (Methodology) at bottom half
+                    s2.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 4.3, w: 11.7, h: 2.1, fill: { color: 'F1F5F9' }, line: { color: 'E2E8F0', width: 1 } });
+                    s2.addText('HỆ THỐNG ĐỒNG BỘ DỮ LIỆU VÀ PHƯƠNG PHÁP KẾ THƯA:', { x: 1.1, y: 4.45, w: 11.1, h: 0.3, fontSize: 10, bold: true, color: NAVY, fontFace: "Arial" });
+                    s2.addText('• Toàn bộ dữ liệu được đối chiếu trực tiếp từ Sheet "RoadmapQ2" thuộc file gốc.\n• Hệ thống tự động kế thừa và bổ khuyết các mốc trống từ đợt rà soát tuần trước (22/05) để tránh đứt gãy luồng thông tin lịch sử.\n• Phương pháp phát triển Số áp dụng chuẩn mực theo mô hình 4Ds (Define -> Design -> Develop -> Deploy) nhằm liên tục giám sát và tối ưu hóa trải nghiệm khách hàng tại SHS.', {
+                        x: 1.1, y: 4.8, w: 11.1, h: 1.4, fontSize: 9.5, color: '334155', fontFace: "Arial"
+                    });
+
+
+                    // --- SLIDE 3: GO-LIVE HIGHLIGHTS (Clean Grid Layout) ---
+                    let s3 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s3.addText('II. CHI TIẾT 4 ĐIỂM SÁNG GO-LIVE THÀNH CÔNG', { x: 0.8, y: 0.4, w: 8.0, h: 0.6, fontSize: 18, color: '10B981', bold: true, fontFace: "Arial" });
+                    s3.addText('Các dự án then chốt đã hoàn thiện lập trình, nghiệm thu và chạy chính thức trên môi trường thật', { x: 0.8, y: 0.95, w: 8.0, h: 0.4, fontSize: 11, color: GRAY, fontFace: "Arial" });
+
+                    const spotlights = [
+                        { title: 'Core Phase 1 Giao dịch', text: 'Chính thức go-live kết nối an toàn ngày 25/05/2026. Giải quyết dứt điểm hoàn toàn tình trạng nghẽn lệnh, tăng tốc xử lý lệnh gấp 5 lần so với nền tảng cũ.', label: 'CORE GIAO DỊCH' },
+                        { title: 'Migrate Dữ liệu Lịch sử', text: 'Chuyển đổi thành công 100% dữ liệu lịch sử giao dịch và số dư tài sản của khách hàng trong 03 tháng gần nhất, không xảy ra bất kỳ lỗi lệch số dư nào.', label: 'DATA MIGRATION' },
+                        { title: 'Money Market - Sinh Lời', text: 'Đồng kết hợp ngân hàng mẹ SHB ra mắt sản phẩm tối ưu hóa tiền nhàn rỗi ngắn hạn cho KH. Go-live thử nghiệm chạy êm ngày 20/05/2026.', label: 'WEALTHTECH' },
+                        { title: 'Ecosystem SHBxSHS Ph1', text: 'Mở rộng kênh số eKYC mở tài khoản liên kết chéo ngay trên ứng dụng di động SHB Mobile vào ngày 05/05. Tăng trưởng tài khoản số vượt mong đợi trên 15%.', label: 'HỆ SINH THÁI' }
+                    ];
+
+                    spotlights.forEach((card, idx) => {
+                        let row = Math.floor(idx / 2);
+                        let col = idx % 2;
+                        let xPos = 0.8 + (col * 6.1); // width 5.6, gap 0.5. Total width: 11.7. Max boundary: 12.5. Perfect!
+                        let yPos = 1.4 + (row * 2.5); // height 2.2, gap 0.3. Total height: 4.7. Max boundary: 6.2. Perfect!
+
+                        s3.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: xPos, y: yPos, w: 5.6, h: 2.2, fill: { color: WHITE }, line: { color: '10B981', width: 1.5 } });
+                        
+                        // Tag badge inside card
+                        s3.addShape(pptx.shapes.RECTANGLE, { x: xPos + 0.3, y: yPos + 0.25, w: 1.8, h: 0.3, fill: { color: 'D1FAE5' } });
+                        s3.addText(card.label, { x: xPos + 0.3, y: yPos + 0.25, w: 1.8, h: 0.3, fontSize: 8, bold: true, color: '065F46', align: 'center', fontFace: "Arial" });
+
+                        s3.addText(`✔ ${card.title}`, { x: xPos + 0.3, y: yPos + 0.65, w: 5.0, h: 0.35, fontSize: 12, bold: true, color: '065F46', fontFace: "Arial" });
+                        s3.addText(card.text, { x: xPos + 0.3, y: yPos + 1.05, w: 5.0, h: 1.0, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+                    });
+
+
+                    // --- SLIDE 4: DEEP DIVE: CORE FLEX (Vertical clean stacked cards) ---
+                    let s4 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s4.addText('III. PHÂN TÍCH SÂU: CORE GIAO DỊCH & ĐỊNH DANH SỐ', { x: 0.8, y: 0.4, w: 8.5, h: 0.6, fontSize: 18, color: NAVY, bold: true, fontFace: "Arial" });
+                    
+                    // Card 1: Core Phase 1 (Green)
+                    s4.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 1.4, w: 11.7, h: 1.3, fill: { color: 'F0FDF4' }, line: { color: '10B981', width: 1 } });
+                    s4.addText('Done (Hoàn thành)  |  Core Phase 1 & Di trú dữ liệu lịch sử', { x: 1.1, y: 1.45, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: '15803D', fontFace: "Arial" });
+                    s4.addText('Hệ thống Core Flex mới chạy chính thức ngày 25/5 bàn giao an toàn. Toàn bộ hạ tầng giao dịch cơ sở kết nối ổn định mượt mà.', { x: 1.1, y: 1.75, w: 11.1, h: 0.8, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Card 2: Core Phase 2 (White / Gray)
+                    s4.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 3.0, w: 11.7, h: 1.3, fill: { color: WHITE }, line: { color: 'CBD5E1', width: 1 } });
+                    s4.addText('Chưa Kick-off  |  Core Phase 2 (Hoàn thiện quy tắc vận hành liên phòng)', { x: 1.1, y: 3.05, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: GRAY, fontFace: "Arial" });
+                    s4.addText('Dự kiến mốc hoàn thành: Tháng 9/2026. Sắp tới sẽ đưa vào trọng tâm phân bổ nguồn lực rà soát xây dựng quy trình trong Q2.', { x: 1.1, y: 3.35, w: 11.1, h: 0.8, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Card 3: Blocker eKYC Viettel (Red)
+                    s4.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 4.6, w: 11.7, h: 2.0, fill: { color: 'FFF1F2' }, line: { color: RED, width: 1.5 } });
+                    s4.addText('🔴 ĐIỂM NGHẼN: Đổi Mới Engine eKYC (Đối tác Viettel)', { x: 1.1, y: 4.7, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: 'BE123C', fontFace: "Arial" });
+                    s4.addText('• Thực trạng: Viettel chưa hoàn thành thủ tục pháp lý kết nối dữ liệu trực tiếp với Bộ Công An, dẫn đến chưa có api cung cấp api nâng cấp nhận diện Face-matching mới cho SHS.\n• Hậu quả: Luồng định danh điện tử chưa tối ưu được tỷ lệ nhận diện sinh trắc học sâu.\n• Đề xuất CEO: Hỗ trợ trao đổi tác động ở cấp cao điều hành với Viettel để ưu tiên thúc tiến độ.', { x: 1.1, y: 5.05, w: 11.1, h: 1.4, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+
+                    // --- SLIDE 5: DEEP DIVE: WEALTHTECH ---
+                    let s5 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s5.addText('IV. PHÂN TÍCH SÂU: CÁC SẢN PHẨM WEALTHTECH', { x: 0.8, y: 0.4, w: 8.5, h: 0.6, fontSize: 18, color: NAVY, bold: true, fontFace: "Arial" });
+
+                    // Money Market
+                    s5.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 1.4, w: 11.7, h: 1.3, fill: { color: 'F0FDF4' }, line: { color: '10B981', width: 1 } });
+                    s5.addText('✔ Money Market Phase 1 - "Sinh Lời Nhàn Tênh" (Phối hợp cùng SHB)', { x: 1.1, y: 1.45, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: '15803D', fontFace: "Arial" });
+                    s5.addText('Đã go-live chạy thử nghiệm nội bộ 20/05 ổn định. Phục vụ đắc lực chiến dịch tiền gửi số thông minh, tối ưu hóa lợi nhuận dòng tiền chờ đầu tư của khách hàng cá nhân. Đang chuẩn bị truyền thông.', { x: 1.1, y: 1.75, w: 11.1, h: 0.8, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Bond IPO
+                    s5.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 3.0, w: 11.7, h: 1.3, fill: { color: 'EFF6FF' }, line: { color: '3B82F6', width: 1 } });
+                    s5.addText('⏳ Bond IPO Phase 1 - Phát Hành Trái Phiếu Sơ Cấp Trực Tuyến', { x: 1.1, y: 3.05, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: '1D4ED8', fontFace: "Arial" });
+                    s5.addText('Hạng mục đang triển khai gấp rút. Phòng Sản phẩm Đầu tư cùng ban chiến lược kênh phân phối đang hoàn thiện nốt tờ trình phê duyệt kỹ thuật golive. Dự kiến chạy chính thức vào tuần đầu tháng 6/2026.', { x: 1.1, y: 3.35, w: 11.1, h: 0.8, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Sbond
+                    s5.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 4.6, w: 11.7, h: 2.0, fill: { color: 'FFFBEB' }, line: { color: 'F59E0B', width: 1.2 } });
+                    s5.addText('⚠ Bond Riêng lẻ Phase 2 - Quản lý trái phiếu nội bộ Sbond', { x: 1.1, y: 4.7, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: 'B45309', fontFace: "Arial" });
+                    s5.addText('• Trạng thái: Chờ phụ thuộc kiểm thử UAT nghiệp vụ. Hiện tại các phòng ban đang tạm dùng tính năng TPRL tạm trên Core mới.\n• Điểm nghẽn: Phần mềm SBond chưa nghiệm thu nghiệp vụ do chưa thống nhất biểu phí thu lưu ký tự động.\n• Hành động tiếp theo: Bắt buộc Product Owner phải chủ động ngồi họp liên tịch chốt biểu mẫu pháp lý & luồng kế toán trước ngày 10/06.', { x: 1.1, y: 5.05, w: 11.1, h: 1.4, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+
+                    // --- SLIDE 6: ECOSYSTEM SHB-SHS ---
+                    let s6 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s6.addText('V. HỢP TÁC HỆ SINH THÁI CHIẾN LƯỢC SHB × SHS', { x: 0.8, y: 0.4, w: 8.5, h: 0.6, fontSize: 18, color: NAVY, bold: true, fontFace: "Arial" });
+
+                    // Phase 1
+                    s6.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 1.4, w: 11.7, h: 1.3, fill: { color: 'F0FDF4' }, line: { color: '10B981', width: 1 } });
+                    s6.addText('✔ SHBxSHS Phase 1 - Mở tài khoản chéo từ App Mobile SHB', { x: 1.1, y: 1.45, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: '15803D', fontFace: "Arial" });
+                    s6.addText('Đã go-live toàn diện và thành công ngày 05/05/2026. Khách hàng đăng ký tiện lợi, số lượng tài khoản mở mới số hóa tăng trưởng bền vững trên 15% trong tháng đầu vận hành.', { x: 1.1, y: 1.75, w: 11.1, h: 0.8, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Phase 2
+                    s6.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 3.0, w: 11.7, h: 2.1, fill: { color: 'FFF1F2' }, line: { color: RED, width: 1.5 } });
+                    s6.addText('🔴 ĐIỂM NGHẼN: SHBxSHS Phase 2 - Đồng Bộ Dữ Liệu & Phân Hạng Chéo', { x: 1.1, y: 3.1, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: 'BE123C', fontFace: "Arial" });
+                    s6.addText('• Vấn đề: Phía Ngân hàng SHB hỗ trợ kỹ thuật và phản hồi api rất chậm chạp, trì hoãn liên tục do lý do an toàn bảo mật nội bộ và quá tải hạ tầng của họ.\n• Hậu quả: Không thể tự động gán mã Môi giới quản lý khi KH mở tài khoản, chưa đồng bộ được phân hạng VIP.\n• Phương án chốt ngày 2/6: CNTT bàn giao spec kết nối cuối cùng. Nếu SHB không đáp ứng, SHS sẽ chuyển sang phương án tối giản (chỉ hiển thị TnC đồng ý chia sẻ thông tin KH để hạch toán thủ công).', { x: 1.1, y: 3.45, w: 11.1, h: 1.5, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Deeplink
+                    s6.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 5.3, w: 11.7, h: 1.3, fill: { color: 'FFFBEB' }, line: { color: 'F59E0B', width: 1 } });
+                    s6.addText('⏳ Nhúng Deeplink mở tài khoản thanh toán SHB trên App SHS', { x: 1.1, y: 5.35, w: 11.1, h: 0.3, fontSize: 11, bold: true, color: 'B45309', fontFace: "Arial" });
+                    s6.addText('Bản thử nghiệm UAT tích hợp luồng deeplink đã hoàn thành 100%. Đang tạm dừng chờ bộ phận Marketing của SHB cung cấp quy chuẩn banner truyền thông và gói ưu đãi đi kèm để cấu hình đưa lên Store.', { x: 1.1, y: 5.65, w: 11.1, h: 0.8, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+
+                    // --- SLIDE 7: BUSINESS INTELLIGENCE (2x2 Balanced grid) ---
+                    let s7 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s7.addText('VI. QUẢN TRỊ DOANH NGHIỆP, DỮ LIỆU & SẢN PHẨM SỐ', { x: 0.8, y: 0.4, w: 8.5, h: 0.6, fontSize: 18, color: NAVY, bold: true, fontFace: "Arial" });
+
+                    // Dashboard V1
+                    s7.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 1.4, w: 5.6, h: 2.3, fill: { color: 'FFF1F2' }, line: { color: RED, width: 1.2 } });
+                    s7.addText('🔴 NGHẼN: Dashboard Kinh Doanh V1', { x: 1.0, y: 1.5, w: 5.2, h: 0.3, fontSize: 11, bold: true, color: 'BE123C', fontFace: "Arial" });
+                    s7.addText('• Hiện trạng: Số liệu báo cáo tuần cơ bản chạy được. Tuy nhiên, luồng đổ số liệu lịch sử vào Data Mart bị nghẽn do CNTT đang dồn 100% tài nguyên vật lý và nhân sự để trực chiến hỗ trợ vận hành Core Flex mới.\n• Đề xuất CEO: Chỉ đạo CNTT mở hạ tầng máy chủ phụ cấp quyền truy vấn đọc số liệu thô.', { x: 1.0, y: 1.85, w: 5.2, h: 1.7, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // DWH
+                    s7.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 6.9, y: 1.4, w: 5.6, h: 2.3, fill: { color: 'EFF6FF' }, line: { color: '3B82F6', width: 1 } });
+                    s7.addText('⏳ Kho dữ liệu tập trung DWH', { x: 7.1, y: 1.5, w: 5.2, h: 0.3, fontSize: 11, bold: true, color: '1D4ED8', fontFace: "Arial" });
+                    s7.addText('• Thiết lập kiến trúc Data Warehouse thống nhất tất cả các nguồn dữ liệu cũ và mới.\n• Tiến độ: Đã hoàn thiện xong sơ đồ thiết kế tầng dữ liệu logic. Hiện CNTT đang trình phê duyệt tờ trình cấp ngân sách mua server vật lý để chạy demo pipeline đầu tiên.', { x: 7.1, y: 1.85, w: 5.2, h: 1.7, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Knowledge Library
+                    s7.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 4.0, w: 5.6, h: 2.3, fill: { color: 'EFF6FF' }, line: { color: '3B82F6', width: 1 } });
+                    s7.addText('⏳ Thư viện kiến thức số', { x: 1.0, y: 4.1, w: 5.2, h: 0.3, fontSize: 11, bold: true, color: '1D4ED8', fontFace: "Arial" });
+                    s7.addText('• Cổng thông tin hỗ trợ KH và Broker tra cứu kiến thức đầu tư tự động.\n• Tiến độ: Phê duyệt xong BRD và luồng đi người dùng. Bộ phận thiết kế UX cam kết bàn giao (Transfer) toàn bộ bản vẽ thiết kế chuẩn chỉ đúng hẹn ngày 03/06.', { x: 1.0, y: 4.45, w: 5.2, h: 1.7, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+                    // Margin Elite
+                    s7.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 6.9, y: 4.0, w: 5.6, h: 2.3, fill: { color: 'FFFBEB' }, line: { color: 'F59E0B', width: 1 } });
+                    s7.addText('⏳ Số hóa luồng vay Margin Elite', { x: 7.1, y: 4.1, w: 5.2, h: 0.3, fontSize: 11, bold: true, color: 'B45309', fontFace: "Arial" });
+                    s7.addText('• Số hóa luồng đăng ký gói Margin ưu đãi trực tiếp trên App SH Smart.\n• Tiến độ: Đội dự án lập trình vẫn đang tạm dừng chờ bộ phận Phát triển Sản phẩm (PTSP) thuộc Khối Kinh doanh chuyển giao tài liệu đặc tả nghiệp vụ chi tiết mô tả thuật toán chấm điểm KH.', { x: 7.1, y: 4.45, w: 5.2, h: 1.7, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+
+
+                    // --- SLIDE 8: CX KAIZEN (2x2 Balanced grid) ---
+                    let s8 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s8.addText('VII. CHIẾN DỊCH KAIZEN NÂNG CAO TRẢI NGHIỆM SỐ (UI/UX)', { x: 0.8, y: 0.4, w: 8.5, h: 0.6, fontSize: 18, color: NAVY, bold: true, fontFace: "Arial" });
+                    s8.addText('Đồng loạt rà soát tối ưu giao diện tương tác trên 4 trục phần mềm giao dịch then chốt của SHS', { x: 0.8, y: 0.95, w: 8.5, h: 0.4, fontSize: 11, color: GRAY, fontFace: "Arial" });
+
+                    const kaizens = [
+                        { name: '1. SH Smart App (KH Cá nhân)', status: 'Đang làm', text: 'Tối ưu UI đặt lệnh & Bảng giá di động. CX đang hoàn thành thiết kế bản vẽ UX cho lệnh Cơ sở & Phái sinh liên kết.' },
+                        { name: '2. SH Smart Web (KH Cá nhân)', status: 'Chờ phụ thuộc', text: 'Cải tiến bảng giá trên trình duyệt Web. Do cực kỳ thiếu nhân sự thiết kế CX nên mảng Web tạm hoãn để dồn 100% lực lượng cho Mobile App.' },
+                        { name: '3. SHA App (Môi giới App)', status: 'Đang làm', text: 'CX hoàn thiện vẽ UI tính năng khách hàng ủy quyền Môi giới quản lý tài khoản trực tuyến theo tài liệu BRD đã ký.' },
+                        { name: '4. SHA Web (Môi giới Web)', status: 'Đang làm', text: 'Tối ưu giao diện đặt lệnh hộ và tra cứu thông tin tài sản, phí giao dịch. Thiết kế liên tục điều chỉnh theo ý kiến Product Owner.' }
+                    ];
+
+                    kaizens.forEach((item, idx) => {
+                        let row = Math.floor(idx / 2);
+                        let col = idx % 2;
+                        let xPos = 0.8 + (col * 6.1);
+                        let yPos = 1.4 + (row * 2.5);
+
+                        let cl = item.status === 'Đang làm' ? '1D4ED8' : 'B45309';
+                        let bgcl = item.status === 'Đang làm' ? 'EFF6FF' : 'FFFBEB';
+
+                        s8.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: xPos, y: yPos, w: 5.6, h: 2.3, fill: { color: bgcl }, line: { color: cl, width: 1 } });
+                        s8.addText(item.name, { x: xPos + 0.3, y: yPos + 0.2, w: 3.5, h: 0.3, fontSize: 11, bold: true, color: NAVY, fontFace: "Arial" });
+                        s8.addText(`[Trạng thái: ${item.status}]`, { x: xPos + 3.8, y: yPos + 0.2, w: 1.5, h: 0.3, fontSize: 9.5, bold: true, color: cl, align: 'right', fontFace: "Arial" });
+                        s8.addText(item.text, { x: xPos + 0.3, y: yPos + 0.6, w: 5.0, h: 1.5, fontSize: 9.5, color: '1E293B', fontFace: "Arial" });
+                    });
+
+
+                    // --- SLIDE 9: KEY RISKS & MITIGATIONS TABLE (Safe alignment layout) ---
+                    let s9 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s9.addText('VIII. 5 RỦI RO & PHƯƠNG ÁN KIẾN NGHỊ TRÌNH CEO CAN THIỆP', { x: 0.8, y: 0.4, w: 8.5, h: 0.6, fontSize: 18, color: 'EF4444', bold: true, fontFace: "Arial" });
+
+                    // Table Header Row Shape
+                    s9.addShape(pptx.shapes.RECTANGLE, { x: 0.8, y: 1.4, w: 11.7, h: 0.45, fill: { color: NAVY } });
+                    s9.addText('Điểm nghẽn cần tháo gỡ', { x: 1.0, y: 1.48, w: 3.5, h: 0.3, fontSize: 11, bold: true, color: WHITE, fontFace: "Arial" });
+                    s9.addText('Hậu quả & Rủi ro nếu trễ hạn', { x: 4.7, y: 1.48, w: 4.0, h: 0.3, fontSize: 11, bold: true, color: WHITE, fontFace: "Arial" });
+                    s9.addText('Phương án kính trình CEO giải quyết', { x: 8.9, y: 1.48, w: 3.4, h: 0.3, fontSize: 11, bold: true, color: WHITE, fontFace: "Arial" });
+
+                    const risksTable = [
+                        { name: '1. Nâng cấp eKYC (Viettel)', impact: 'Tỷ lệ khách hàng rớt mở tài khoản số tiếp tục duy trì ở mức cao.', action: 'CEO hỗ trợ đàm phán cấp cao với Viettel thúc ký hợp đồng api dữ liệu BCA.' },
+                        { name: '2. SHBxSHS Phase 2 (Đồng bộ)', impact: 'Mất kế hoạch khai thác tệp KH VIP của SHB Mobile chuyển giao sang.', action: 'Chỉ đạo họp liên tịch tháo gỡ mốc 2/6. Chuẩn bị sẵn luồng chia sẻ thông tin KH tối giản.' },
+                        { name: '3. Dashboard Kinh doanh V1', impact: 'Ban lãnh đạo thiếu số liệu động real-time hỗ trợ ra quyết định kinh doanh.', action: 'Yêu cầu CNTT ưu tiên mở máy chủ ảo cấp quyền đọc số liệu thô sang Data Mart.' },
+                        { name: '4. Chuẩn hóa Core 2', impact: 'Chậm trễ quy trình phối hợp xử lý nghiệp vụ sau khi chạy lõi mới.', action: 'Chính thức phê duyệt thành lập Ban dự án Core Phase 2, phân rõ vai trò đầu mối vận hành.' },
+                        { name: '5. Thiếu nhân lực CX thiết kế Web', impact: 'Web giao dịch Smart Web bị đình trệ, gây lệch pha trải nghiệm app di động.', action: 'Phê duyệt gấp ngân sách thuê ngoài (Outsource) 01 thiết kế UI/UX ngắn hạn trong tháng 6.' }
+                    ];
+
+                    risksTable.forEach((row, idx) => {
+                        let yPos = 1.95 + (idx * 0.9); // max height of 5 rows is y: 6.45. Footer is at 6.9. Perfect!
+                        let rowBg = idx % 2 === 0 ? 'F8FAFC' : WHITE;
+                        s9.addShape(pptx.shapes.RECTANGLE, { x: 0.8, y: yPos, w: 11.7, h: 0.85, fill: { color: rowBg }, line: { color: 'E2E8F0', width: 0.5 } });
+
+                        s9.addText(row.name, { x: 1.0, y: yPos + 0.1, w: 3.5, h: 0.65, fontSize: 10, bold: true, color: '991B1B', fontFace: "Arial" });
+                        s9.addText(row.impact, { x: 4.7, y: yPos + 0.1, w: 4.0, h: 0.65, fontSize: 9, color: '1E293B', fontFace: "Arial" });
+                        s9.addText(row.action, { x: 8.9, y: yPos + 0.1, w: 3.4, h: 0.65, fontSize: 9, bold: true, color: NAVY, fontFace: "Arial" });
+                    });
+
+
+                    // --- SLIDE 10: ACTION PLAN & KPIS ---
+                    let s10 = pptx.addSlide({ masterName: "SHS_CONTENT" });
+                    s10.addText('IX. HÀNH ĐỘNG TRỌNG TÂM & KPIS THÁNG 6', { x: 0.8, y: 0.4, w: 8.5, h: 0.6, fontSize: 18, color: NAVY, bold: true, fontFace: "Arial" });
+                    s10.addText('Kế hoạch phân bổ nguồn lực cụ thể cho 3 trụ cột phát triển mấu chốt', { x: 0.8, y: 0.95, w: 8.5, h: 0.4, fontSize: 11, color: GRAY, fontFace: "Arial" });
+
+                    // Column 1
+                    s10.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 1.4, w: 3.6, h: 5.2, fill: { color: LIGHT_GRAY }, line: { color: NAVY, width: 1.5 } });
+                    s10.addShape(pptx.shapes.OVAL, { x: 1.1, y: 1.6, w: 0.4, h: 0.4, fill: { color: NAVY } });
+                    s10.addText('1', { x: 1.1, y: 1.6, w: 0.4, h: 0.4, fontSize: 14, bold: true, color: WHITE, align: 'center', fontFace: "Arial" });
+                    s10.addText('WealthTech & Báo cáo số', { x: 1.7, y: 1.6, w: 2.5, h: 0.4, fontSize: 12, bold: true, color: NAVY, fontFace: "Arial" });
+                    s10.addText('• Bond IPO Phase 1: Hoàn tất ký trình duyệt pháp lý để go-live rộng rãi tới KH cá nhân trong tuần 1 tháng 6/2026.\n• Dashboard V1: Phối hợp CNTT hoàn thành luồng đồng bộ dữ liệu vào Data Mart để bàn giao bản báo cáo động đầu tiên cho CEO trước ngày 15/06.', { x: 1.0, y: 2.3, w: 3.2, h: 4.0, fontSize: 10, color: '1E293B', fontFace: "Arial" });
+
+                    // Column 2
+                    s10.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 4.85, y: 1.4, w: 3.6, h: 5.2, fill: { color: LIGHT_GRAY }, line: { color: NAVY, width: 1.5 } });
+                    s10.addShape(pptx.shapes.OVAL, { x: 5.15, y: 1.6, w: 0.4, h: 0.4, fill: { color: NAVY } });
+                    s10.addText('2', { x: 5.15, y: 1.6, w: 0.4, h: 0.4, fontSize: 14, bold: true, color: WHITE, align: 'center', fontFace: "Arial" });
+                    s10.addText('Hệ sinh thái & Core 2', { x: 5.75, y: 1.6, w: 2.5, h: 0.4, fontSize: 12, bold: true, color: NAVY, fontFace: "Arial" });
+                    s10.addText('• Đàm phán SHB: Chuẩn bị sẵn phương án dự phòng để chốt dứt điểm luồng TnC chia sẻ thông tin KH vào cuộc họp ngày 02/06 nếu phương án gán mã môi giới tự động bị phía SHB từ chối do vấn đề kỹ thuật bảo mật.\n• Core Phase 2: Tổ chức họp kick-off toàn công ty để thống nhất Roadmap triển khai chi tiết.', { x: 5.05, y: 2.3, w: 3.2, h: 4.0, fontSize: 10, color: '1E293B', fontFace: "Arial" });
+
+                    // Column 3
+                    s10.addShape(pptx.shapes.ROUNDED_RECTANGLE, { x: 8.9, y: 1.4, w: 3.6, h: 5.2, fill: { color: LIGHT_GRAY }, line: { color: NAVY, width: 1.5 } });
+                    s10.addShape(pptx.shapes.OVAL, { x: 9.2, y: 1.6, w: 0.4, h: 0.4, fill: { color: NAVY } });
+                    s10.addText('3', { x: 9.2, y: 1.6, w: 0.4, h: 0.4, fontSize: 14, bold: true, color: WHITE, align: 'center', fontFace: "Arial" });
+                    s10.addText('Sản phẩm & Trải nghiệm', { x: 9.8, y: 1.6, w: 2.5, h: 0.4, fontSize: 12, bold: true, color: NAVY, fontFace: "Arial" });
+                    s10.addText('• Thư viện kiến thức: Nghiệm thu bàn giao và chuyển giao toàn bộ file thiết kế UI/UX vào ngày 03/06 đúng hạn cam kết.\n• Kaizen UI/UX: Đẩy nhanh tiến độ hoàn thành thiết kế UX luồng đặt lệnh nhanh trên App di động để đưa vào lập trình UAT trong tháng 6.', { x: 9.1, y: 2.3, w: 3.2, h: 4.0, fontSize: 10, color: '1E293B', fontFace: "Arial" });
+
+
+                    // --- WRITE/SAVE FILE ---
+                    pptx.writeFile({ fileName: 'BaoCao_Thang5_2026.pptx' }).then(() => {
+                        toastText.innerText = "Tải xuống file PowerPoint thành công!";
+                        setTimeout(() => {
+                            toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+                        }, 2500);
+                    }).catch((err) => {
+                        console.error("Lỗi ghi file PowerPoint:", err);
+                        toastText.innerText = "Lỗi khi tạo file. Vui lòng thử lại!";
+                        setTimeout(() => {
+                            toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+                        }, 3000);
+                    });
+
+                } catch (error) {
+                    console.error("Lỗi xuất PowerPoint:", error);
+                    toastText.innerText = "Lỗi khởi tạo PowerPoint. Vui lòng thử lại!";
+                    setTimeout(() => {
+                        toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+                    }, 3000);
+                }
+            }, 1000);
+        }
+
+        // INITIALIZE PRESENTATION ON WINDOW LOAD
+        window.onload = () => {
+            showSlide(1);
+        };
+    </script>
+</body>
+</html>
